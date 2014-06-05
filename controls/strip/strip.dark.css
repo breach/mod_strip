@@ -1,0 +1,80 @@
+.strip {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  overflow: hidden;
+
+  background-color: hsl(200, 0%, 98%);
+  /*
+  background-color: #212834;
+  background-image: url('/assets/bg.jpg');
+  background-size: cover;
+  */
+  border-right: 1px solid hsl(0, 0%, 75%);
+  border-top: 1px solid hsl(0, 0%, 95%);
+}
+
+.strip .tabs .tab {
+  position: absolute;
+  top: -34px;
+  left: 2px;
+  right: 2px;
+
+  color: black;
+  background-color: rgba(155, 155, 155, 0.2);
+
+  border-radius: 1px;
+  margin-top: 2px;
+
+  padding-top: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  height: 32px;
+
+  cursor: pointer;
+  transition: top 0.2s;
+  box-shadow:inset 0px 0px 1px rgba(155, 155, 155, 0.6);
+}
+
+.strip .tabs .tab.active {
+  background-color: rgba(155, 155, 155, 0.1);
+}
+
+.strip .tabs .tab > div.favicon {
+  display: inline-block;
+  vertical-align: top;
+
+  height: 20px;
+  width: 20px;
+
+  margin-top: 5px;
+  margin-right: 5px;
+
+  border-radius: 3px;
+  background-size: cover;
+}
+
+
+.strip .tabs .tab > div.content {
+  vertical-align: top;
+  display: inline-block;
+
+  width: 135px;
+}
+
+.strip .tabs .tab > div.content .title {
+  font-weight: 100;
+  font-size: 0.85em;
+
+  margin-top: 8px;
+
+  opacity: 0.7;
+
+  text-shadow: 0px 0px 3px hsl(0, 0%, 100%);
+}
+

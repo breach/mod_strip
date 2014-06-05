@@ -1,0 +1,16 @@
+.devtools {
+  position: absolute;
+  background-color: hsl(200, 0%, 100%);
+  /* border-top: 1px solid hsl(200, 14%, 80%); */
+  color: black;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.devtools iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
