@@ -75,9 +75,9 @@ var bootstrap = function(http_srv) {
     socket.on('handshake', function (name) {
       var name_r = /^_(.*)$/;
       var name_m = name_r.exec(name);
-      if(name_m && _[name_m[1]]) {
+      if(name_m && common._[name_m[1]]) {
         console.log('HANDSHAKE: ' + name);
-        _[name_m[1]].handshake(socket);
+        common._[name_m[1]].handshake(socket);
       }
     });
   });
@@ -111,3 +111,8 @@ var bootstrap = function(http_srv) {
   });
 })();
 
+
+process.on('uncaughtException', function (err) {
+  console.log('BOOM');
+  common.fatal(err);
+});

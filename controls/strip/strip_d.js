@@ -21,8 +21,8 @@ angular.module('breach.directives').controller('StripCtrl',
     /**************************************************************************/
     /* TAB MANIPULATION */
     /**************************************************************************/
-    var TAB_WIDTH = 44;
-    var TAB_MARGIN = 2;
+    var TAB_WIDTH = 170;
+    var TAB_MARGIN = 0;
 
     /**************************************************************************/
     /* TAB MANIPULATION */
@@ -43,11 +43,26 @@ angular.module('breach.directives').controller('StripCtrl',
           $scope.select_tab(tab_id);
         })
         .append($('<div/>')
+          .addClass('border-left'))
+        .append($('<div/>')
+          .addClass('border-bottom'))
+        .append($('<div/>')
+          .addClass('border-right'))
+        .append($('<div/>')
+          .addClass('close-tab')
+          .click(function() {
+            $scope.close_tab(tab_id);
+          })
+          .append($('<div/>')
+            .addClass('icon-iconfont-01')))
+        .append($('<div/>')
           .addClass('favicon'))
         .append($('<div/>')
           .addClass('content')
           .append($('<div/>')
-            .addClass('title')));
+            .addClass('title')))
+        .append($('<div/>')
+          .addClass('close'));
       return tab;
     };
 
@@ -126,7 +141,15 @@ angular.module('breach.directives').controller('StripCtrl',
     // ```
     var position_tab = function(tab_id, idx) {
       var tab = tabs_divs[tab_id];
+      console.log(idx);
       tab.css('left', idx * (TAB_WIDTH + TAB_MARGIN));
+    };
+
+    // ### position_new_tab
+    var position_new_tab = function(tab_count) {
+      $($element)
+        .find('.tabs .new_tab')
+        .css('left', tab_count * (TAB_WIDTH + TAB_MARGIN));
     };
 
     // ### remove_tab
@@ -146,6 +169,7 @@ angular.module('breach.directives').controller('StripCtrl',
     /* ANGULAR INTEGRATION */
     /**************************************************************************/
     $scope.$watch('state', function(state) {
+      console.log(state);
       if(state) {
         var tabs_data = {};
         var tabs_order = [];
@@ -155,7 +179,7 @@ angular.module('breach.directives').controller('StripCtrl',
           tabs_order.push(t.tab_id);
           if(!tabs_divs[t.tab_id]) {
             tabs_divs[t.tab_id] = create_tab(t.tab_id);
-            $($element).find('tabs').append(tabs_divs[t.tab_id]);
+            $($element).find('.tabs').append(tabs_divs[t.tab_id]);
           }
         });
         /* Cleanup Closed tabs */
@@ -169,6 +193,8 @@ angular.module('breach.directives').controller('StripCtrl',
         
         /* Update tabs position. */
         tabs_order.forEach(position_tab);
+        position_new_tab(tabs_order.length);
+
         /* Update tabs state. */
         tabs_order.forEach(function(tab_id) {
           update_tab(tab_id, tabs_data[tab_id]);
@@ -181,6 +207,13 @@ angular.module('breach.directives').controller('StripCtrl',
         //console.log('select_tab: ' + id);
         _socket.emit('select', tab_id);
       }
+    };
+    $scope.close_tab = function(tab_id) {
+      _socket.emit('close', tab_id);
+    };
+
+    $scope.new_tab = function() {
+      _socket.emit('new');
     };
   });
 
