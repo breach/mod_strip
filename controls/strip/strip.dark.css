@@ -36,17 +36,17 @@
   font-size: 0.9em;
 }
 
-.strip .command.prev {
+.strip .command.back {
   left: 0px;
 }
-.strip .command.prev:hover {
+.strip .command.back:hover {
   color: hsl(200, 50%, 50%);
 }
 
-.strip .command.next {
+.strip .command.forward {
   left: 30px;
 }
-.strip .command.next:hover {
+.strip .command.forward:hover {
   color: hsl(200, 50%, 50%);
 }
 
@@ -71,6 +71,11 @@
   background-color: hsl(0, 0%, 14%);
   border-left: 1px solid hsl(0, 0%, 20%);
   border-right: 1px solid hsl(0, 0%, 20%);
+}
+
+.strip .box iframe {
+  width: 100%;
+  height: 100%;
 }
 
 .strip .wrapper {

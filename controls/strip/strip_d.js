@@ -212,7 +212,13 @@ angular.module('breach.directives').controller('StripCtrl',
       _socket.emit('close', tab_id);
     };
 
-    $scope.new_tab = function() {
+    $scope.cmd_back = function() {
+      _socket.emit('back');
+    };
+    $scope.cmd_forward = function() {
+      _socket.emit('forward');
+    };
+    $scope.cmd_new = function() {
       _socket.emit('new');
     };
   });

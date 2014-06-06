@@ -1,17 +1,18 @@
 <div class="strip">
-  <div class="command prev">
+  <div class="command back" ng-click="cmd_back()">
     <div class="icon">
       <span class="icon-iconfont-05"></span>
     </div>
   </div>
-  <div class="command next">
+  <div class="command forward" ng-click="cmd_forward()">
     <div class="icon">
       <span class="icon-iconfont-06"></span>
     </div>
   </div>
   <div class="box">
+    <iframe src="/box" frameborder="0" scrolling="no"></iframe>
   </div>
-  <div class="command new" ng-click="new_tab()">
+  <div class="command new" ng-click="cmd_new()">
     <div class="icon">
       <span class="icon-iconfont-02"></span>
     </div>
