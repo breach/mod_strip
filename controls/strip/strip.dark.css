@@ -121,7 +121,7 @@
   left: 0px;
   width: 1px;
 
-  background-color: hsl(0, 0%, 28%);
+  background-color: hsl(0, 0%, 34%);
 }
 
 .strip .tabs .tab > div.border-bottom {
@@ -180,14 +180,15 @@
 }
 
 .strip .tabs .tab > div.favicon {
-  display: inline-block;
+  display: none;
   vertical-align: top;
 
-  height: 20px;
-  width: 20px;
+  margin-top: 15px;
+  margin-left: 7px;
+  margin-right: -2px;
 
-  margin-top: 5px;
-  margin-right: 5px;
+  height: 18px;
+  width: 18px;
 
   border-radius: 3px;
   background-size: cover;
@@ -195,21 +196,21 @@
 
 
 .strip .tabs .tab > div.content {
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 30px;
-  right: 0px;
-
-  vertical-align: top;
   display: inline-block;
+  vertical-align: top;
+
+  margin-top: 0px;
+  margin-left: 7px;
+
   overflow: hidden;
 }
 
 .strip .tabs .tab > div.content .title {
+  position: absolute;
   margin-top: 17px;
   color: hsl(0, 0%, 70%);
   font-weight: normal;
+  white-space: nowrap;
 }
 
 .strip .tabs .tab.active > div.content .title {

@@ -87,9 +87,6 @@ angular.module('breach.directives').controller('StripCtrl',
       }
       else {
         data.title = tab_data.title || 'Loading...';
-        if(data.title.length > 20) {
-          data.title = data.title.substr(0, 20) + '...';
-        }
         data.url = tab_data.url || '';
         if(tab_data.state) {
           tab_data.state.entries.forEach(function(n) {
@@ -106,11 +103,11 @@ angular.module('breach.directives').controller('StripCtrl',
       if($scope.active === tab_id)
         tab.addClass('active');
       if(data.favicon && data.favicon.length > 0) {
+        console.log(data.favicon);
         var favicon_sha = SHA1(data.favicon);
         var favicon_div = tab.find('.favicon');
         if(favicon_sha !== favicon_div.attr('favicon_sha')) {
-          favicon_div.css('background-color', 
-                          'transparent');
+          favicon_div.css('display', 'inline-block');
           favicon_div.css('background-image', 
                           'url(' + data.favicon + ')');
           favicon_div.attr('favicon_sha', favicon_sha);
@@ -118,12 +115,12 @@ angular.module('breach.directives').controller('StripCtrl',
         }
       }
       else {
+        console.log(data.favicon);
         var favicon_sha = SHA1('');
         var favicon_div = tab.find('.favicon');
         if(favicon_div.attr('favicon_host') !== data.url.hostname &&
            favicon_sha !== favicon_div.attr('favicon_sha')) {
-          favicon_div.css('background-color', 
-                          'hsl(0, 0%, 80%)');
+          favicon_div.css('display', 'none');
           favicon_div.css('background-image', 
                           'none');
           favicon_div.attr('favicon_sha', favicon_sha);
@@ -141,7 +138,6 @@ angular.module('breach.directives').controller('StripCtrl',
     // ```
     var position_tab = function(tab_id, idx) {
       var tab = tabs_divs[tab_id];
-      console.log(idx);
       tab.css('left', idx * (TAB_WIDTH + TAB_MARGIN));
     };
 
