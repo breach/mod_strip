@@ -18,6 +18,9 @@
 //
 angular.module('breach.directives').controller('StripCtrl',
   function($scope, $element, _socket) {
+
+    var cthief = new ColorThief();
+
     /**************************************************************************/
     /* TAB MANIPULATION */
     /**************************************************************************/
@@ -103,7 +106,6 @@ angular.module('breach.directives').controller('StripCtrl',
       if($scope.active === tab_id)
         tab.addClass('active');
       if(data.favicon && data.favicon.length > 0) {
-        console.log(data.favicon);
         var favicon_sha = SHA1(data.favicon);
         var favicon_div = tab.find('.favicon');
         if(favicon_sha !== favicon_div.attr('favicon_sha')) {
