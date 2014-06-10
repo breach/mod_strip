@@ -45,6 +45,7 @@ angular.module('breach.directives').controller('StripCtrl',
     // ```
     var create_tab = function(tab_id) {
       var tab = $('<div/>')
+        .attr('id', tab_id)
         .addClass('tab')
         .click(function() {
           $scope.select_tab(tab_id);
@@ -52,7 +53,7 @@ angular.module('breach.directives').controller('StripCtrl',
         .append($('<div/>')
           .addClass('separator'))
         .append($('<div/>')
-          .addClass('border-bottom'))
+          .addClass('loading'))
         .append($('<div/>')
           .addClass('favicon'))
         .append($('<div/>')
@@ -81,6 +82,8 @@ angular.module('breach.directives').controller('StripCtrl',
     var update_tab = function(tab_id, tab_data) {
       var tab = tabs_divs[tab_id];
       tab.removeClass('active');
+
+      /* Construct data object. */
       var data = {
         title: '',
         url: { hostname: '', href: '' },
@@ -109,10 +112,13 @@ angular.module('breach.directives').controller('StripCtrl',
           data.loading = tab_data.state.loading;
         }
       }
-      //console.log(JSON.stringify(data, null, 2));
+
+      /* Update title. */
       tab.find('.title').text(data.title);
+      /* Update active state. */
       if($scope.active === tab_id)
         tab.addClass('active');
+      /* Update favicon. */
       if(data.favicon && data.favicon.length > 0) {
         var favicon_sha = SHA1(data.favicon);
         var favicon_div = tab.find('.favicon');
@@ -139,6 +145,40 @@ angular.module('breach.directives').controller('StripCtrl',
           favicon_div.attr('favicon_sha', favicon_sha);
           favicon_div.attr('favicon_host', data.url.hostname);
         }
+      }
+      /* Update loading. */
+      if(data.loading && !tab.attr('loading')) {
+        tab.find('.loading').css({
+          'transition': 'none',
+          'right': TAB_WIDTH + 'px'
+        });
+        var value = 10;
+        var update = function() {
+          tab.find('.loading').css({
+            'transition': 'right 0.3s ease-out',
+            'right': Math.floor(TAB_WIDTH - TAB_WIDTH * value / 100) + 'px'
+          });
+        }
+        setTimeout(function() {
+          update();
+        }, 100);
+        var itv = setInterval(function() {
+          console.log('value: ' + value);
+          if(tab.attr('loading')) {
+            value = Math.min(Math.floor(value + Math.random() * 10), 100);
+            update();
+          }
+          else {
+            clearInterval(itv);
+          }
+        }, 500);
+        tab.attr('loading', 'true');
+      }
+      if(!data.loading && tab.attr('loading')) {
+        tab.find('.loading').css({
+          'right': '0px'
+        });
+        tab.attr('loading', null);
       }
     };
 

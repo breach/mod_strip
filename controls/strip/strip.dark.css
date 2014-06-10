@@ -124,7 +124,7 @@
   background-color: hsl(0, 0%, 34%);
 }
 
-.strip .tabs .tab > div.border-bottom {
+.strip .tabs .tab > div.loading {
   position: absolute;
   bottom: 0px;
   height: 5px;
@@ -135,7 +135,7 @@
   background-color: hsl(0, 0%, 0%);
 }
 
-.strip .tabs .tab.active > div.border-bottom {
+.strip .tabs .tab.active > div.loading {
   background-color: hsl(0, 0%, 35%);
 }
 
