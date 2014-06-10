@@ -80,16 +80,21 @@ angular.module('breach.directives').controller('StripCtrl',
       var data = {
         title: '',
         url: { hostname: '', href: '' },
-        favicon: ''
+        favicon: '',
+        loading: true
       };
       if(tab_data.type === 'new_tab') {
         data.title = 'New Tab';
         data.url = 'toto';
       }
       else {
-        data.title = tab_data.title || 'Loading...';
+        data.title = tab_data.title;
         data.url = tab_data.url || '';
         if(tab_data.state) {
+          /* TODO(spolu): Keep old title as long as possible? */
+          if(tab_data.state.loading && !data.title) {
+            data.title = 'Loading...';
+          }
           tab_data.state.entries.forEach(function(n) {
             if(n.visible) {
               if(n.favicon) {
@@ -97,6 +102,7 @@ angular.module('breach.directives').controller('StripCtrl',
               }
             }
           });
+          data.loading = tab_data.state.loading;
         }
       }
       //console.log(JSON.stringify(data, null, 2));
@@ -117,7 +123,6 @@ angular.module('breach.directives').controller('StripCtrl',
         }
       }
       else {
-        console.log(data.favicon);
         var favicon_sha = SHA1('');
         var favicon_div = tab.find('.favicon');
         var content_div = tab.find('.content');
@@ -169,13 +174,15 @@ angular.module('breach.directives').controller('StripCtrl',
     /* ANGULAR INTEGRATION */
     /**************************************************************************/
     $scope.$watch('state', function(state) {
-      console.log(state);
       if(state) {
         var tabs_data = {};
         var tabs_order = [];
         /* Create any missing tab. */
         state.tabs.forEach(function(t) {
           tabs_data[t.tab_id] = t;
+          if(t && t.state && t.state.loading) {
+            console.log(t);
+          }
           tabs_order.push(t.tab_id);
           if(!tabs_divs[t.tab_id]) {
             tabs_divs[t.tab_id] = create_tab(t.tab_id);
