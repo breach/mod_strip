@@ -88,6 +88,8 @@
   left: 424px;
   right: 0px;
   padding: 0;
+
+  overflow: hidden;
 }
 
 .strip .tabs {
