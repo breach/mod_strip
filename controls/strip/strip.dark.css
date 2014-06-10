@@ -4,35 +4,38 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 50px;
+  height: 45px;
   padding: 0;
 
   overflow: hidden;
 
-  background-color: hsl(0, 0%, 18%);
-  /*
-  background-color: #212834;
-  background-image: url('/assets/bg.jpg');
-  background-size: cover;
-  */
-  border-bottom: 1px solid hsl(0, 0%, 4%);
+  background-color: hsl(0, 0%, 19%);
+}
+
+.strip .bottom {
+  position: absolute;
+  bottom: 0;
+  height: 5px;
+  left: 0;
+  right: 0;
+  background-color: hsl(0, 0%, 0%);
 }
 
 .strip .command {
   position: absolute;
   top: 0px;
   bottom: 0px;
-  width: 30px;
+  width: 28px;
 
   cursor: pointer;
   color: hsl(0, 0%, 70%);
-  text-shadow: 0px 0px 1px hsl(0, 0%, 10%);
+  text-align: center;
+  -webkit-font-smoothing: antialiased !important;
 }
 
 .strip .command .icon {
   display: inline-block;
-  margin-top: 18px;
-  margin-left: 10px;
+  margin-top: 17px;
   font-size: 0.9em;
 }
 
@@ -44,14 +47,14 @@
 }
 
 .strip .command.forward {
-  left: 30px;
+  left: 28px;
 }
 .strip .command.forward:hover {
   color: hsl(200, 50%, 50%);
 }
 
 .strip .command.new {
-  left: 400px;
+  left: 396px;
 }
 .strip .command.new:hover {
   color: hsl(100, 50%, 50%);
@@ -61,16 +64,16 @@
 .strip .box {
   position: absolute;
 
-  top: 0;
-  bottom: 0;
-  left: 60px;
+  top: 0px;
+  bottom: 0px;
+  left: 56px;
   width: 340px;
 
   overflow: hidden;
 
-  background-color: hsl(0, 0%, 14%);
-  border-left: 1px solid hsl(0, 0%, 20%);
-  border-right: 1px solid hsl(0, 0%, 20%);
+  background-color: hsl(0, 0%, 10%);
+  border-bottom: 5px solid hsl(0, 0%, 0%);
+  border-top: 5px solid hsl(0, 0%, 10%);
 }
 
 .strip .box iframe {
@@ -82,7 +85,7 @@
   position: absolute;
   top: 0px;
   bottom: 0px;
-  left: 435px;
+  left: 424px;
   right: 0px;
   padding: 0;
 }
@@ -107,17 +110,12 @@
   color: white;
   cursor: pointer;
   transition: left 0.2s;
-  /*box-shadow:inset 0px 0px 1px rgba(155, 155, 155, 0.6);*/
 }
 
-.strip .tabs .tab.active {
-  /* background-color: rgba(155, 155, 155, 0.1); */
-}
-
-.strip .tabs .tab > div.border-left {
+.strip .tabs .tab > div.separator {
   position: absolute;
-  top: 10px;
-  bottom: 10px;
+  top: 8px;
+  bottom: 12px;
   left: 0px;
   width: 1px;
 
@@ -127,94 +125,104 @@
 .strip .tabs .tab > div.border-bottom {
   position: absolute;
   bottom: 0px;
-  height: 2px;
+  height: 5px;
   left: 0px;
   right: 0px;
 
+  z-index: 100;
+  background-color: hsl(0, 0%, 0%);
+}
+
+.strip .tabs .tab.active > div.border-bottom {
   background-color: hsl(0, 0%, 35%);
 }
 
-.strip .tabs .tab > div.border-right {
+.strip .tabs .tab > div.favicon {
   position: absolute;
-  top: 15px;
-  bottom: 15px;
+  display: none;
+  vertical-align: top;
+
+  top: 14px;
+  left: 7px;
+  height: 18px;
+  width: 18px;
+
+  border-radius: 3px;
+  background-size: cover;
+
+  -webkit-filter: grayscale(1);
+  opacity: 0.8;
+}
+
+.strip .tabs .tab.active > div.favicon {
+  -webkit-filter: grayscale(0);
+  opacity: 1.0;
+}
+
+
+
+.strip .tabs .tab > div.content {
+  position: absolute;
+  display: block;
+  left: 7px;
+  right: 5px;
+  top: 2px;
+  bottom: 5px;
+  vertical-align: top;
+
+  overflow: hidden;
+}
+
+.strip .tabs .tab > div.content.with-favicon {
+  left: 32px;
+}
+.strip .tabs .tab:hover > div.content {
+  right: 25px;
+}
+
+.strip .tabs .tab > div.content .shadow {
+  position: absolute;
+  top: 0px;
+  left: 0px;
   right: 0px;
-  width: 1px;
-
-  box-shadow: 0px 0px 6px 6px hsl(0, 0%, 18%);
-
-  background-color: hsl(0, 0%, 18%);
-  z-index: 2;
-}
-.strip .tabs .tab:hover > div.border-right {
-  visibility: hidden;
+  bottom: 0px;
+  z-index: 10;
+  -webkit-box-shadow: inset -6px 0px 6px hsl(0, 0%, 19%);
 }
 
-.strip .tabs .tab > div.close-tab {
+.strip .tabs .tab > div.content .title {
+  margin-top: 14px;
+  color: hsl(0, 0%, 70%);
+  font-weight: normal;
+  white-space: nowrap;
+  z-index: 5;
+}
+
+.strip .tabs .tab.active > div.content .title {
+  color: hsl(0, 0%, 100%);
+  font-weight: bold;
+}
+
+.strip .tabs .tab > div.close {
+  display:none;
   position: absolute;
   top: 15px;
   bottom: 15px;
   right: 0px;
   width: 25px;
 
-  box-shadow: 0px 0px 6px 6px hsl(0, 0%, 18%);
-
-  visibility: hidden;
-  background-color: hsl(0, 0%, 18%);
-  z-index: 2;
-
   font-size: 0.8em;
   cursor: pointer;
-  text-shadow: 0px 0px 1px hsl(0, 0%, 10%);
   color: hsl(0, 0%, 40%);
 }
-.strip .tabs .tab:hover > div.close-tab {
-  visibility: visible;
+.strip .tabs .tab:hover > div.close {
+  display: block;
 }
-.strip .tabs .tab > div.close-tab:hover {
+.strip .tabs .tab > div.close:hover {
   color: hsl(0, 50%, 50%);
 }
-.strip .tabs .tab > div.close-tab > div {
-  margin-top: 4px;
+.strip .tabs .tab > div.close > div {
+  margin-top: 3px;
   margin-left: 5px;
 }
-
-.strip .tabs .tab > div.favicon {
-  display: none;
-  vertical-align: top;
-
-  margin-top: 15px;
-  margin-left: 7px;
-  margin-right: -2px;
-
-  height: 18px;
-  width: 18px;
-
-  border-radius: 3px;
-  background-size: cover;
-}
-
-
-.strip .tabs .tab > div.content {
-  display: inline-block;
-  vertical-align: top;
-
-  margin-top: 0px;
-  margin-left: 7px;
-
-  overflow: hidden;
-}
-
-.strip .tabs .tab > div.content .title {
-  position: absolute;
-  margin-top: 17px;
-  color: hsl(0, 0%, 70%);
-  font-weight: normal;
-  white-space: nowrap;
-}
-
-.strip .tabs .tab.active > div.content .title {
-  color: hsl(0, 0%, 100%);
-}
-
 

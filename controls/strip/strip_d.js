@@ -46,26 +46,24 @@ angular.module('breach.directives').controller('StripCtrl',
           $scope.select_tab(tab_id);
         })
         .append($('<div/>')
-          .addClass('border-left'))
+          .addClass('separator'))
         .append($('<div/>')
           .addClass('border-bottom'))
-        .append($('<div/>')
-          .addClass('border-right'))
-        .append($('<div/>')
-          .addClass('close-tab')
-          .click(function() {
-            $scope.close_tab(tab_id);
-          })
-          .append($('<div/>')
-            .addClass('icon-iconfont-01')))
         .append($('<div/>')
           .addClass('favicon'))
         .append($('<div/>')
           .addClass('content')
           .append($('<div/>')
+            .addClass('shadow'))
+          .append($('<div/>')
             .addClass('title')))
         .append($('<div/>')
-          .addClass('close'));
+          .addClass('close')
+          .click(function() {
+            $scope.close_tab(tab_id);
+          })
+          .append($('<div/>')
+            .addClass('icon-iconfont-01')));
       return tab;
     };
 
@@ -108,8 +106,10 @@ angular.module('breach.directives').controller('StripCtrl',
       if(data.favicon && data.favicon.length > 0) {
         var favicon_sha = SHA1(data.favicon);
         var favicon_div = tab.find('.favicon');
+        var content_div = tab.find('.content');
         if(favicon_sha !== favicon_div.attr('favicon_sha')) {
-          favicon_div.css('display', 'inline-block');
+          favicon_div.css('display', 'block');
+          content_div.addClass('with-favicon');
           favicon_div.css('background-image', 
                           'url(' + data.favicon + ')');
           favicon_div.attr('favicon_sha', favicon_sha);
@@ -120,9 +120,11 @@ angular.module('breach.directives').controller('StripCtrl',
         console.log(data.favicon);
         var favicon_sha = SHA1('');
         var favicon_div = tab.find('.favicon');
+        var content_div = tab.find('.content');
         if(favicon_div.attr('favicon_host') !== data.url.hostname &&
            favicon_sha !== favicon_div.attr('favicon_sha')) {
           favicon_div.css('display', 'none');
+          content_div.removeClass('with-favicon');
           favicon_div.css('background-image', 
                           'none');
           favicon_div.attr('favicon_sha', favicon_sha);
