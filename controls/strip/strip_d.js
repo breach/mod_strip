@@ -88,7 +88,7 @@ angular.module('breach.directives').controller('StripCtrl',
         title: '',
         url: { hostname: '', href: '' },
         favicon: '',
-        loading: true
+        loading: false
       };
       if(tab_data.type === 'new_tab') {
         data.title = 'New Tab';
@@ -160,7 +160,9 @@ angular.module('breach.directives').controller('StripCtrl',
           });
         }
         setTimeout(function() {
-          update();
+          if(tab.attr('loading')) {
+            update();
+          }
         }, 100);
         var itv = setInterval(function() {
           console.log('value: ' + value);
