@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="breach">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -9,30 +9,31 @@
 
     <link rel="stylesheet" href="/css/fonts.css"/>
     <link rel="stylesheet" href="/css/main.css"/>
-    <link rel="stylesheet" href="devtools_d.css"/>
+    <link rel="stylesheet" href="devtools.css"/>
   </head>
 
-  <body ng-controller="DevToolsTopCtrl">
+  <body>
 
-    <devtools state="state"></devtools>
+    <div class="devtools">
+      <iframe src="/devtools/blank.html" frameborder="0" scrolling="no"></iframe>
+    </div>
 
     <!-- Scripts -->
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/lib/angular-1.3.0-beta.10.min.js"></script>
     <script src="/lib/jquery-2.1.1.min.js"></script>
 
-    <script src="app.js"></script>
-
-    <!-- Filters -->
-    <script src="/js/filters.js"></script>
-
-    <!-- Services -->
-    <script src="/js/bind_s.js"></script>
-    <script src="/js/socket_s.js"></script>
-
-    <!-- Components -->
-    <script src="devtools_d.js"></script>
-
+    <!-- Main -->
+    <script type="text/javascript">
+      var devtools_url = '/devtools/blank.html';
+      my.socket = io.connect();
+      my.socket.on('state', function(state) {
+        if(state) {
+          if(state.devtools_url !== devtools_url) {
+          }
+        }
+      });
+      my.socket.emit('handshake', '_devtools');
+    </script>
   </body>
 </html>
 

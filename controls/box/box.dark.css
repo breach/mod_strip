@@ -1,53 +1,16 @@
-.box {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  overflow: hidden;
-}
-
-.box .input,
-.box .input:focus {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-
-  border: 0;
-  width: 100%;
-}
-
-.box .input.find {
+.box.dark .input.find {
   background-color: hsla(100, 0%, 90%, 1);
 }
-.box .input.find.match {
+.box.dark .input.find.match {
   background-color: hsla(100, 40%, 90%, 1);
 }
-.box .input.find.fail {
+.box.dark .input.find.fail {
   background-color: hsla(0, 40%, 90%, 1);
 }
 
-.box .input form {
-  position: absolute;
-  top: 0;
-  left: 5px;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-}
-
-.box .input input,
-.box .input input:focus {
-  width: 100%;
-  height: 100%;
-  outline: none !important;
+.box.dark .input input,
+.box.dark .input input:focus {
   color: hsl(0, 0%, 95%);
-  border: 0;
   background-color: rgba(0, 0, 0, 0);
-  padding: 0;
-  font-weight: normal;
-  -webkit-font-smoothing: antialiased !important;
 }
 

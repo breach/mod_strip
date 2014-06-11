@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="breach">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -9,31 +9,51 @@
 
     <link rel="stylesheet" href="/css/fonts.css"/>
     <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="strip.css"/>
     <link rel="stylesheet" href="strip.dark.css"/>
   </head>
 
-  <body ng-controller="StripTopCtrl">
-
-    <strip state="state"></strip>
+  <body>
+    <!-- The strip -->
+    <div class="strip dark">
+      <div class="bottom"></div>
+      <div class="command back" ng-click="strip.cmd_back()">
+        <div class="icon">
+          <span class="icon-iconfont-05"></span>
+        </div>
+      </div>
+      <div class="command forward" ng-click="strip.cmd_forward()">
+        <div class="icon">
+          <span class="icon-iconfont-06"></span>
+        </div>
+      </div>
+      <div class="box">
+        <iframe src="/box" frameborder="0" scrolling="no"></iframe>
+      </div>
+      <div class="command new" ng-click="strip.cmd_new()">
+        <div class="icon">
+          <span class="icon-iconfont-02"></span>
+        </div>
+      </div>
+      <div class="wrapper">
+        <div class="tabs">
+        </div>
+      </div>
+    </div>
 
     <!-- Scripts -->
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/lib/angular-1.3.0-beta.10.min.js"></script>
     <script src="/lib/jquery-2.1.1.min.js"></script>
     <script src="/lib/tinySHA1-r4.js"></script>
     <script src="/lib/color-thief-2.0.min.js"></script>
 
-    <script src="app.js"></script>
+    <!-- Controllers -->
+    <script src="strip_c.js"></script>
 
-    <!-- Filters -->
-    <script src="/js/filters.js"></script>
-
-    <!-- Services -->
-    <script src="/js/bind_s.js"></script>
-    <script src="/js/socket_s.js"></script>
-
-    <!-- Components -->
-    <script src="strip_d.js"></script>
+    <!-- Main -->
+    <script type="text/javascript">
+      var strip = strip_c({ strip_el: $('.strip') }).init();
+    </script>
   </body>
 </html>
 

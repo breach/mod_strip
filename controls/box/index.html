@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="breach">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -9,30 +9,30 @@
 
     <link rel="stylesheet" href="/css/fonts.css"/>
     <link rel="stylesheet" href="/css/main.css"/>
+    <link rel="stylesheet" href="box.css"/>
     <link rel="stylesheet" href="box.dark.css"/>
   </head>
 
-  <body ng-controller="BoxTopCtrl">
-
-    <box state="state"></box>
+  <body>
+    <div class="box dark">
+      <div class="input">
+        <form>
+          <input>
+        </form>
+      </div>
+    </div>
 
     <!-- Scripts -->
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/lib/angular-1.3.0-beta.10.min.js"></script>
     <script src="/lib/jquery-2.1.1.min.js"></script>
 
-    <script src="app.js"></script>
+    <!-- Controllers -->
+    <script src="box_c.js"></script>
 
-    <!-- Filters -->
-    <script src="/js/filters.js"></script>
-
-    <!-- Services -->
-    <script src="/js/bind_s.js"></script>
-    <script src="/js/socket_s.js"></script>
-
-    <!-- Components -->
-    <script src="box_d.js"></script>
-
+    <!-- Main -->
+    <script type="text/javascript">
+      var box = box_c({ box_el: $('.box') }).init();
+    </script>
   </body>
 </html>
 
