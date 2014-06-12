@@ -33,7 +33,7 @@
 }
 
 .strip .tabs .tab > div.content .shadow {
-  -webkit-box-shadow: inset -6px 0px 6px hsl(0, 0%, 19%);
+  box-shadow: inset -6px 0px 6px hsl(0, 0%, 19%);
 }
 
 .strip .tabs .tab > div.content .title {

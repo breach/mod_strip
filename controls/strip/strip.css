@@ -20,8 +20,8 @@
 
 .strip .command {
   position: absolute;
-  top: 0px;
-  bottom: 0px;
+  top: 0;
+  bottom: 0;
   width: 28px;
 
   cursor: pointer;
@@ -36,7 +36,7 @@
 }
 
 .strip .command.back {
-  left: 0px;
+  left: 0;
 }
 .strip .command.back:hover {
   color: hsl(200, 50%, 50%);
@@ -59,8 +59,8 @@
 .strip .box {
   position: absolute;
 
-  top: 0px;
-  bottom: 0px;
+  top: 0;
+  bottom: 0;
   left: 56px;
   width: 340px;
 
@@ -74,10 +74,10 @@
 
 .strip .wrapper {
   position: absolute;
-  top: 0px;
-  bottom: 0px;
+  top: 0;
+  bottom: 0;
   left: 424px;
-  right: 0px;
+  right: 0;
   padding: 0;
 
   overflow: hidden;
@@ -87,7 +87,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0px;
+  left: 0;
   padding: 0;
 }
 
@@ -95,8 +95,8 @@
   position: absolute;
   max-width: 170px;
   min-width: 170px;
-  top: 0px;
-  bottom: 0px;
+  top: 0;
+  bottom: 0;
 
   overflow: hidden;
 
@@ -108,7 +108,7 @@
   position: absolute;
   top: 8px;
   bottom: 12px;
-  left: 0px;
+  left: 0;
   width: 1px;
 
   background-color: hsl(0, 0%, 34%);
@@ -116,10 +116,10 @@
 
 .strip .tabs .tab > div.loading {
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   height: 5px;
-  left: 0px;
-  right: 0px;
+  left: 0;
+  right: 0;
 
   z-index: 100;
 }
@@ -170,10 +170,10 @@
 
 .strip .tabs .tab > div.content .shadow {
   position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 10;
 }
 
@@ -193,7 +193,7 @@
   position: absolute;
   top: 15px;
   bottom: 15px;
-  right: 0px;
+  right: 0;
   width: 25px;
 
   font-size: 0.8em;

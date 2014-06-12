@@ -1,22 +1,43 @@
 .box {
   position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   overflow: hidden;
+}
+
+.box .ssl {
+  position: absolute;
+  left: 7px;
+  width: 10px;
+  top: 10px;
+  bottom: 10px;
+  color: hsl(0, 0%, 15%);
+
+  font-size: 1.2em;
+}
+
+.box.ssl_auth .ssl {
+  color: hsl(110, 80%, 45%);
+}
+
+.box .input .shadow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  z-index: 10;
 }
 
 .box .input,
 .box .input:focus {
   position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-
-  border: 0;
-  width: 100%;
+  top: 0;
+  left: 25px;
+  right: 0;
+  bottom: 0;
 }
 
 .box .input.find {
@@ -28,21 +49,61 @@
 
 .box .input form {
   position: absolute;
-  top: 0;
-  left: 5px;
-  right: 0;
-  bottom: 0;
+  height: 100%;
+  width: 100%;
   z-index: 1;
 }
 
-.box .input input,
-.box .input input:focus {
-  width: 100%;
-  height: 100%;
+.box .input form input,
+.box .input form input:focus {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   outline: none !important;
   border: 0;
   padding: 0;
   font-weight: normal;
+  width: 100%;
+}
+
+.box .input form input {
+  opacity: 0;
+}
+
+.box .input.focus form input,
+.box .input:hover form input {
+  opacity: 1;
+  font-weight: bold;
   -webkit-font-smoothing: antialiased !important;
 }
 
+
+.box .input .glass {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding-top: 11px;
+
+  border: 0;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.box .input .glass .host {
+  font-weight: bold;
+}
+
+.box .input .glass .path {
+  font-weight: bold;
+  opacity: 0.5;
+}
+
+.box .input:hover .glass,
+.box .input.focus .glass {
+  display: none;
+}

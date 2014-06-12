@@ -37,12 +37,14 @@ var box_c = function(spec, my) {
   //
   // ### _private_
   //
-  var input_change_handler; /* input_change_hanlder(); */
-  var form_submit_handler;  /* form_submit_hanlder(); */
+  var input_change_handler;   /* input_change_hanlder(); */
+  var input_focusin_handler;  /* input_focusin_hanlder(); */
+  var input_focusout_handler; /* input_focusout_hanlder(); */
+  var form_submit_handler;    /* form_submit_hanlder(); */
 
-  var state_handler;        /* state_handler(state); */
-  var select_all_handler;   /* select_all_handler(); */
-  var focus_handler;        /* focus_handler(); */
+  var state_handler;          /* state_handler(state); */
+  var select_all_handler;     /* select_all_handler(); */
+  var focus_handler;          /* focus_handler(); */
 
   var that = {}
 
@@ -71,6 +73,21 @@ var box_c = function(spec, my) {
     });
   };
 
+  // ### form_focusin_handler
+  //
+  // Handler called on input focusin
+  input_focusin_handler = function() {
+    my.box_el.find('.input').addClass('focus');
+  }
+
+  // ### form_focusout_handler
+  //
+  // Handler called on input focusin
+  input_focusout_handler = function() {
+    my.box_el.find('.input').removeClass('focus');
+    my.socket.emit('input', null);
+  }
+
   /**************************************************************************/
   /* SOCKET.IO HANDLER */
   /**************************************************************************/
@@ -85,6 +102,8 @@ var box_c = function(spec, my) {
       //console.log('+++++++++++++++++++++++++++++++++++');
       //console.log(JSON.stringify(state, null, 2));
       //console.log('+++++++++++++++++++++++++++++++++++');
+      
+      /* Input udpate. */
       if(state.input !== null) {
         my.value = state.input;
       }
@@ -98,6 +117,20 @@ var box_c = function(spec, my) {
         my.input_el.val(my.value);
       }
       my.last = my.value; 
+
+      if(state.url) {
+        my.box_el.find('.glass .host').text(state.url.host);
+        my.box_el.find('.glass .path').text(state.url.path);
+        my.box_el.find('.glass .hash').text(state.url.hash);
+      }
+
+      /* SSL update. */
+      if(state.ssl && state.ssl.security_type === 'authenticated') {
+        my.box_el.addClass('ssl_auth');
+      }
+      else {
+        my.box_el.removeClass('ssl_auth');
+      }
     }
   };
 
@@ -130,8 +163,9 @@ var box_c = function(spec, my) {
 
     my.input_el.keyup(input_change_handler);
     my.form_el.submit(form_submit_handler);
+    my.input_el.focusin(input_focusin_handler);
+    my.input_el.focusout(input_focusout_handler);
 
-    console.log(my.input_el);
     return that;
   };
 

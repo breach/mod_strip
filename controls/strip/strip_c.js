@@ -361,6 +361,7 @@ var strip_c = function(spec, my) {
   //
   // Issue a new tab command
   cmd_new = function() {
+    console.log('NEW!');
     my.socket.emit('new');
   };
 
