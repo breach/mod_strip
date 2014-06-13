@@ -13,13 +13,12 @@
   width: 10px;
   top: 10px;
   bottom: 10px;
-  color: hsl(0, 0%, 15%);
 
   font-size: 1.2em;
 }
 
 .box.ssl_auth .ssl {
-  color: hsl(110, 80%, 45%);
+  color: hsl(110, 80%, 45%) !important;
 }
 
 .box .input .shadow {

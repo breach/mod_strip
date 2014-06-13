@@ -1,3 +1,7 @@
+.box.light .ssl {
+  color: hsl(0, 0%, 97%);
+}
+
 .box.light .input .shadow {
   background-color: hsl(0, 0%, 100%);
   box-shadow: 0px 0px 6px 6px hsl(0, 0%, 100%);
