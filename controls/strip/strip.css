@@ -122,9 +122,11 @@
   right: 0;
 
   z-index: 100;
+  opacity: 0.5;
 }
 
 .strip .tabs .tab.active > div.loading {
+  opacity: 1.0;
 }
 
 .strip .tabs .tab > div.favicon {
@@ -140,12 +142,12 @@
   border-radius: 3px;
   background-size: cover;
 
-  -webkit-filter: grayscale(1);
-  opacity: 0.8;
+  /* -webkit-filter: grayscale(0.5); */
+  opacity: 0.5;
 }
 
 .strip .tabs .tab.active > div.favicon {
-  -webkit-filter: grayscale(0);
+  /* -webkit-filter: grayscale(0); */
   opacity: 1.0;
 }
 

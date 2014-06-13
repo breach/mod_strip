@@ -8,6 +8,7 @@
     "express": "4.0.x",
     "body-parser": "1.0.x",
     "method-override": "1.0.x",
-    "socket.io": "1.0.x"
+    "socket.io": "1.0.x",
+    "request": "2.36.x"
   }
 }

@@ -14,6 +14,7 @@ var http = require('http');
 var common = require('./lib/common.js');
 var breach = require('breach_module');
 var async = require('async');
+var request = require('request');
 
 /******************************************************************************/
 /* MODULE BOOTSTRAP */
@@ -101,6 +102,10 @@ var bootstrap = function(http_srv) {
   app.use('/', express.static(__dirname + '/controls'));
   app.use(require('body-parser')());
   app.use(require('method-override')())
+
+  app.get('/proxy', function(req, res, next) {
+    request(req.param('url')).pipe(res);
+  });
 
   var http_srv = http.createServer(app).listen(0, '127.0.0.1');
 

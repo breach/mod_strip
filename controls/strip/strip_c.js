@@ -6,6 +6,8 @@
  * @author: spolu
  *
  * @log:
+ * - 2014-06-13 spolu  Remove favicon on navigation #2
+ * - 2014-06-13 spolu  Loading progress dumpling
  * - 2014-06-11 spolu  Removed angularJS
  * - 2014-06-04 spolu  Forked from `mod_stack`
  * - 2014-05-21 spolu  New state format (tabs on core_state)
@@ -33,6 +35,8 @@ var strip_c = function(spec, my) {
   /* Dictionary of tabs div elements. */
   my.tabs_divs = {};
   my.active = null;
+
+  my.color = color({});
 
   //
   // ### _public_
@@ -111,7 +115,8 @@ var strip_c = function(spec, my) {
     /* Construct desc object. */
     var desc = {
       title: '',
-      url: { hostname: '', href: '' },
+      url: '',
+      host: '',
       favicon: '',
       loading: false
     };
@@ -132,6 +137,9 @@ var strip_c = function(spec, my) {
             if(n.favicon) {
               desc.favicon = n.favicon;
             }
+            if(n.url) {
+              desc.host = n.url.host;
+            }
           }
         });
         desc.loading = data.state.loading;
@@ -140,39 +148,66 @@ var strip_c = function(spec, my) {
 
     /* Update title. */
     tab.find('.title').text(desc.title);
+
     /* Update active state. */
     if(my.active === tab_id)
       tab.addClass('active');
+
     /* Update favicon. */
-    if(desc.favicon && desc.favicon.length > 0) {
-      var favicon_sha = SHA1(desc.favicon);
-      var favicon_el = tab.find('.favicon');
+    var favicon_el = tab.find('.favicon');
+    var favicon_sha = SHA1(desc.favicon || '');
+
+    var update_favicon = function() {
       var content_el = tab.find('.content');
-      if(favicon_sha !== favicon_el.attr('favicon_sha')) {
+      if(desc.favicon && desc.favicon.length > 0) {
         favicon_el.css('display', 'block');
         content_el.addClass('with-favicon');
         favicon_el.css('background-image', 
                         'url(' + desc.favicon + ')');
-        favicon_el.attr('favicon_sha', favicon_sha);
-        favicon_el.attr('favicon_host', desc.url.hostname);
+        if(tab.favicon_need_color) {
+          var proxied_img_url = null;
+          if(desc.favicon.substr(0,5) === 'data:') {
+            proxied_img_url = desc.favicon;
+          }
+          else {
+            proxied_img_url = '/proxy?url=' + encodeURIComponent(desc.favicon);
+          }
+          var img = new Image();
+          img.src = proxied_img_url;
+          img.onload = function() {
+            tab.favicon_need_color = false;
+            var rgb = my.color.get(img);
+            tab.find('.loading').css({
+              'background-color': 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')'
+            });
+          }
+        }
       }
-    }
-    else {
-      var favicon_sha = SHA1('');
-      var favicon_el = tab.find('.favicon');
-      var content_el = tab.find('.content');
-      if(favicon_el.attr('favicon_host') !== desc.url.hostname &&
-         favicon_sha !== favicon_el.attr('favicon_sha')) {
+      else {
         favicon_el.css('display', 'none');
         content_el.removeClass('with-favicon');
         favicon_el.css('background-image', 
                         'none');
-        favicon_el.attr('favicon_sha', favicon_sha);
-        favicon_el.attr('favicon_host', desc.url.hostname);
+        if(tab.favicon_need_color) {
+          tab.find('.loading').css({
+            'background-color': ''
+          });
+        }
       }
+      tab.favicon_sha = favicon_sha;
+      tab.favicon_host = desc.host;
+    };
+
+    if(tab.favicon_host !== desc.host) {
+      tab.favicon_need_color = true;
+      update_favicon();
     }
+    if(desc.favicon && favicon_sha !== tab.favicon_sha) {
+      update_favicon();
+    }
+
     /* Update loading. */
-    if(desc.loading && !tab.attr('loading')) {
+    if(desc.loading && !tab.loading) {
       tab.find('.loading').css({
         'transition': 'none',
         'right': my.TAB_WIDTH + 'px'
@@ -185,26 +220,27 @@ var strip_c = function(spec, my) {
         });
       }
       setTimeout(function() {
-        if(tab.attr('loading')) {
+        if(tab.loading) {
           update();
         }
       }, 100);
       var itv = setInterval(function() {
-        if(tab.attr('loading')) {
-          value = Math.min(Math.floor(value + Math.random() * 10), 100);
+        if(tab.loading) {
+          var dumpling = Math.exp(- value / (my.TAB_WIDTH - value));
+          value = Math.min(Math.floor(value + dumpling * Math.random() * 20), 100);
           update();
         }
         else {
           clearInterval(itv);
         }
       }, 500);
-      tab.attr('loading', 'true');
+      tab.loading = true;
     }
-    if(!desc.loading && tab.attr('loading')) {
+    if(!desc.loading && tab.loading) {
       tab.find('.loading').css({
         'right': '0px'
       });
-      tab.attr('loading', null);
+      tab.loading = false;
     }
   };
 
@@ -361,7 +397,6 @@ var strip_c = function(spec, my) {
   //
   // Issue a new tab command
   cmd_new = function() {
-    console.log('NEW!');
     my.socket.emit('new');
   };
 
@@ -370,9 +405,11 @@ var strip_c = function(spec, my) {
   // Initialises the controller
   init = function() {
     my.wrapper_el.bind('mousewheel', mousewheel_handler);
-    my.socket = io.connect();
-    my.socket.on('state', state_handler);
-    my.socket.emit('handshake', '_strip');
+    my.socket = io();
+    my.socket.on('connect', function() {
+      my.socket.on('state', state_handler);
+      my.socket.emit('handshake', '_strip');
+    });
 
     return that;
   };
