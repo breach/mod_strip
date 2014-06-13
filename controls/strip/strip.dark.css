@@ -16,35 +16,35 @@
   border-top: 5px solid hsl(0, 0%, 10%);
 }
 
-.strip .tabs .tab {
+.strip.dark .tabs .tab {
   color: white;
 }
 
-.strip .tabs .tab > div.separator {
+.strip.dark .tabs .tab > div.separator {
   background-color: hsl(0, 0%, 34%);
 }
 
-.strip .tabs .tab > div.loading {
+.strip.dark .tabs .tab > div.loading {
   background-color: hsl(0, 0%, 0%);
 }
 
-.strip .tabs .tab.active > div.loading {
+.strip.dark .tabs .tab.active > div.loading {
   background-color: hsl(0, 0%, 35%);
 }
 
-.strip .tabs .tab > div.content .shadow {
+.strip.dark .tabs .tab > div.content .shadow {
   box-shadow: inset -6px 0px 6px hsl(0, 0%, 19%);
 }
 
-.strip .tabs .tab > div.content .title {
+.strip.dark .tabs .tab > div.content .title {
   color: hsl(0, 0%, 70%);
 }
 
-.strip .tabs .tab.active > div.content .title {
+.strip.dark .tabs .tab.active > div.content .title {
   color: hsl(0, 0%, 100%);
 }
 
-.strip .tabs .tab > div.close {
+.strip.dark .tabs .tab > div.close {
   color: hsl(0, 0%, 40%);
 }
 

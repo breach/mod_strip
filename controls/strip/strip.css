@@ -203,7 +203,7 @@
   display: block;
 }
 .strip .tabs .tab > div.close:hover {
-  color: hsl(0, 50%, 50%);
+  color: hsl(0, 50%, 50%) !important;
 }
 .strip .tabs .tab > div.close > div {
   margin-top: 3px;

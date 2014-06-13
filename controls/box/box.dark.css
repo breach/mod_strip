@@ -19,12 +19,12 @@
   background-color: rgba(0, 0, 0, 0);
 }
 
-.box .input .glass .host {
+.box.dark .input .glass .host {
   color: hsl(0, 0%, 80%);
 }
-.box .input .glass .path {
+.box.dark .input .glass .path {
   color: hsl(0, 0%, 60%);
 }
-.box .input .glass .hash {
+.box.dark .input .glass .hash {
   color: hsl(0, 0%, 60%);
 }

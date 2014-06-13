@@ -1,19 +1,20 @@
 .devtools {
-  position: absolute;
+  position: fixed;
   top: 0px;
   bottom: 0px;
   left: 0px;
   right: 0px;
+
+  border-top: 5px solid black;
 
   overflow: hidden;
 }
 
 .devtools iframe {
   position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+
+  width: 100%;
+  height: 100%;
 
   overflow: hidden;
 

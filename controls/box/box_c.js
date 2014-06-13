@@ -68,7 +68,7 @@ var box_c = function(spec, my) {
   // Handler called on input submit
   form_submit_handler = function() {
     my.socket.emit('submit', { 
-      input: my.value, 
+      input: my.input_el.val(), 
       is_ctrl: false
     });
   };
