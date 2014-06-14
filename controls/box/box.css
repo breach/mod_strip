@@ -21,6 +21,30 @@
   color: hsl(110, 80%, 45%) !important;
 }
 
+.box.focus .ssl {
+  display: none;
+}
+
+.box .search {
+  display: none;
+
+  position: absolute;
+  left: 7px;
+  width: 10px;
+  top: 10px;
+  bottom: 10px;
+
+  font-size: 1.2em;
+}
+
+.box.focus .search {
+  display: block;
+}
+
+.box.find_in_page .search {
+  color: hsl(200, 80%, 45%) !important;
+}
+
 .box .input .shadow {
   position: absolute;
   top: 0;
@@ -71,7 +95,7 @@
   opacity: 0;
 }
 
-.box .input.focus form input,
+.box.focus .input form input,
 .box .input:hover form input {
   opacity: 1;
   font-weight: bold;
@@ -103,6 +127,6 @@
 }
 
 .box .input:hover .glass,
-.box .input.focus .glass {
+.box.focus .input .glass {
   display: none;
 }

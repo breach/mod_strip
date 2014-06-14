@@ -28,6 +28,11 @@ var box_c = function(spec, my) {
 
   my.value = null;
   my.last = null;
+  my.mode = null;
+
+  my.MODE_NORMAL = 1 << 0;
+  my.MODE_FIND_IN_PAGE = 1 << 1;
+  my.MODE_COMMAND = 1 << 2;
 
   //
   // ### _public_
@@ -40,6 +45,7 @@ var box_c = function(spec, my) {
   var input_change_handler;   /* input_change_hanlder(); */
   var input_focusin_handler;  /* input_focusin_hanlder(); */
   var input_focusout_handler; /* input_focusout_hanlder(); */
+  var input_keydown_handler;  /* input_keydown_handler(); */
   var form_submit_handler;    /* form_submit_hanlder(); */
 
   var state_handler;          /* state_handler(state); */
@@ -63,30 +69,54 @@ var box_c = function(spec, my) {
     }
   };
 
+  // ### input_focusin_handler
+  //
+  // Handler called on input focusin
+  input_focusin_handler = function() {
+    my.box_el.addClass('focus');
+  }
+
+  // ### input_focusout_handler
+  //
+  // Handler called on input focusin
+  input_focusout_handler = function() {
+    my.box_el.removeClass('focus');
+    my.socket.emit('input', null);
+  }
+
+  // ### input_keydown_handler
+  //
+  // Handler called on keydown
+  input_keydown_handler = function(evt) {
+    if(evt.which === 27) {
+      my.box_el.find('input').blur();
+    }
+    if(my.mode === my.MODE_FIND_IN_PAGE && my.input_el.is(':focus')) {
+      console.log(evt);
+      if(evt.which === 13 && (evt.ctrlKey || evt.metaKey)) {
+        my.socket.emit('submit', { 
+          input: my.input_el.val(), 
+          is_ctrl: true
+        });
+        evt.preventDefault();
+        evt.stopPropagation();
+      }
+    }
+  }
+
   // ### form_submit_handler
   //
   // Handler called on input submit
-  form_submit_handler = function() {
+  form_submit_handler = function(evt) {
     my.socket.emit('submit', { 
       input: my.input_el.val(), 
       is_ctrl: false
     });
+    if(my.mode === my.MODE_FIND_IN_PAGE) {
+      evt.preventDefault();
+      evt.stopPropagation();
+    }
   };
-
-  // ### form_focusin_handler
-  //
-  // Handler called on input focusin
-  input_focusin_handler = function() {
-    my.box_el.find('.input').addClass('focus');
-  }
-
-  // ### form_focusout_handler
-  //
-  // Handler called on input focusin
-  input_focusout_handler = function() {
-    my.box_el.find('.input').removeClass('focus');
-    my.socket.emit('input', null);
-  }
 
   /**************************************************************************/
   /* SOCKET.IO HANDLER */
@@ -131,6 +161,18 @@ var box_c = function(spec, my) {
       else {
         my.box_el.removeClass('ssl_auth');
       }
+
+      /* mode update. */
+      my.mode = state.mode;
+      switch(my.mode) {
+        case my.MODE_FIND_IN_PAGE: {
+          my.box_el.addClass('find_in_page');
+          break;
+        }
+        default: {
+          my.box_el.removeClass('find_in_page');
+        }
+      }
     }
   };
 
@@ -162,9 +204,10 @@ var box_c = function(spec, my) {
     my.socket.emit('handshake', '_box');
 
     my.input_el.keyup(input_change_handler);
-    my.form_el.submit(form_submit_handler);
     my.input_el.focusin(input_focusin_handler);
     my.input_el.focusout(input_focusout_handler);
+    my.input_el.keydown(input_keydown_handler);
+    my.form_el.submit(form_submit_handler);
 
     return that;
   };
@@ -176,30 +219,6 @@ var box_c = function(spec, my) {
 };
 
 /*
-    _input.keydown(function(evt) {
-      switch($scope.mode) {
-        case MODE_FIND_IN_PAGE: {
-          if(evt.keyCode === 27) {
-            _socket.emit('box_input_out');
-          }
-          break;
-        }
-        case MODE_NORMAL: {
-          if(evt.keyCode === 27) {
-            _socket.emit('box_input_out');
-          }
-          break;
-        }
-      }
-    });
-    _input.focusout(function() {
-      switch($scope.mode) {
-        case MODE_FIND_IN_PAGE: {
-          _socket.emit('box_input_out');
-          break;
-        }
-      }
-    });
     
     _input.keydown(function(e) {
       if($scope.mode === MODE_FIND_IN_PAGE && _input.is(':focus')) {

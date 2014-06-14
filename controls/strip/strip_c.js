@@ -209,13 +209,13 @@ var strip_c = function(spec, my) {
     /* Update loading. */
     if(desc.loading && !tab.loading) {
       tab.find('.loading').css({
-        'transition': 'none',
+        'transition': 'opacity 0.2s',
         'right': my.TAB_WIDTH + 'px'
       });
       var value = 10;
       var update = function() {
         tab.find('.loading').css({
-          'transition': 'right 0.3s ease-out',
+          'transition': 'right 0.2s ease-out, opacity 0.2s',
           'right': Math.floor(my.TAB_WIDTH - my.TAB_WIDTH * value / 100) + 'px'
         });
       }
