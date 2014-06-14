@@ -1,5 +1,5 @@
 .strip.light {
-  background-color: hsl(0, 0%, 96%);
+  background-color: hsl(0, 0%, 97%);
 }
 
 .strip.light .bottom {
@@ -33,7 +33,7 @@
 }
 
 .strip.light .tabs .tab > div.content .shadow {
-  box-shadow: inset -6px 0px 6px hsl(0, 0%, 96%);
+  box-shadow: inset -6px 0px 6px hsl(0, 0%, 97%);
 }
 
 .strip.light .tabs .tab > div.content .title {
