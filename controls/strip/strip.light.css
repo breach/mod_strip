@@ -12,7 +12,7 @@
 
 .strip.light .box {
   background-color: hsl(0, 0%, 100%);
-  border-bottom: 5px solid hsl(0, 0%, 85%);
+  border-bottom: 3px solid hsl(0, 0%, 85%);
   border-top: 5px solid hsl(0, 0%, 100%);
 }
 
