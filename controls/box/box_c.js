@@ -89,10 +89,10 @@ var box_c = function(spec, my) {
   // Handler called on keydown
   input_keydown_handler = function(evt) {
     if(evt.which === 27) {
+      my.socket.emit('clear');
       my.box_el.find('input').blur();
     }
     if(my.mode === my.MODE_FIND_IN_PAGE && my.input_el.is(':focus')) {
-      console.log(evt);
       if(evt.which === 13 && (evt.ctrlKey || evt.metaKey)) {
         my.socket.emit('submit', { 
           input: my.input_el.val(), 
@@ -112,10 +112,8 @@ var box_c = function(spec, my) {
       input: my.input_el.val(), 
       is_ctrl: false
     });
-    if(my.mode === my.MODE_FIND_IN_PAGE) {
-      evt.preventDefault();
-      evt.stopPropagation();
-    }
+    evt.preventDefault();
+    evt.stopPropagation();
   };
 
   /**************************************************************************/

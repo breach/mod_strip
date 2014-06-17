@@ -6,6 +6,7 @@
  * @author: spolu
  *
  * @log:
+ * - 2014-06-16 spolu  Tabs filtering
  * - 2014-06-13 spolu  Remove favicon on navigation #2
  * - 2014-06-13 spolu  Loading progress dumpling
  * - 2014-06-11 spolu  Removed angularJS
@@ -341,7 +342,7 @@ var strip_c = function(spec, my) {
         }
       });
 
-      my.active = tabs_order[state.active];
+      my.active = tabs_order[state.active] || null;
 
       /* Update tabs position. */
       tabs_order.forEach(position_tab);
