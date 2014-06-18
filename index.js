@@ -40,8 +40,8 @@ var bootstrap = function(http_srv) {
     })
   };
 
-  breach.register('mod_layout', '.*');
   breach.register('.*', 'devtools');
+  breach.register('mod_layout', 'box_.*');
   breach.register('core', 'tabs:.*');
   breach.register('core', 'controls:keyboard');
 
