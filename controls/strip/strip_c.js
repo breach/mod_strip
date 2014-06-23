@@ -182,7 +182,7 @@ var strip_c = function(spec, my) {
               'background-color': 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')'
             });
             tab.css({
-              'box-shadow': 'inset 0 -3px 0 hsl(0, 0%, 97%)'
+              'box-shadow': 'inset 0 -4px 0 hsl(0, 0%, 97%)'
             });
           }
         }

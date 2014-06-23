@@ -13,7 +13,7 @@
 .strip .bottom {
   position: absolute;
   bottom: 0;
-  height: 3px;
+  height: 4px;
   left: 0;
   right: 0;
 }
@@ -117,7 +117,7 @@
 .strip .tabs .tab > div.loading {
   position: absolute;
   bottom: 0;
-  height: 3px;
+  height: 4px;
   left: 0;
   right: 0;
 
@@ -139,11 +139,10 @@
   height: 18px;
   width: 18px;
 
-  border-radius: 3px;
   background-size: cover;
 
   /* -webkit-filter: grayscale(0.5); */
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .strip .tabs .tab.active > div.favicon {

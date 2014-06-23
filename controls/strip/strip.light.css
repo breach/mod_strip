@@ -12,7 +12,7 @@
 
 .strip.light .box {
   background-color: hsl(0, 0%, 100%);
-  border-bottom: 3px solid hsl(0, 0%, 85%);
+  border-bottom: 4px solid hsl(0, 0%, 85%);
   border-top: 5px solid hsl(0, 0%, 100%);
 }
 
@@ -22,6 +22,7 @@
 
 .strip.light .tabs .tab > div.separator {
   background-color: hsl(0, 0%, 54%);
+  width: 0px;
 }
 
 .strip.light .tabs .tab > div.loading {
@@ -29,7 +30,7 @@
 }
 
 .strip.light .tabs .tab.active > div.loading {
-  background-color: hsl(0, 0%, 70%);
+  background-color: hsl(0, 0%, 65%);
 }
 
 .strip.light .tabs .tab > div.content .shadow {
@@ -37,9 +38,9 @@
 }
 
 .strip.light .tabs .tab > div.content .title {
-  color: hsl(0, 0%, 0%);
+  color: hsl(0, 0%, 10%);
+  font-weight: normal !important;
 }
-
 .strip.light .tabs .tab.active > div.content .title {
   color: hsl(0, 0%, 10%);
 }

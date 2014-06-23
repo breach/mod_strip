@@ -74,6 +74,9 @@ var box_c = function(spec, my) {
   // Handler called on input focusin
   input_focusin_handler = function() {
     my.box_el.addClass('focus');
+    setTimeout(function() {
+      my.input_el.select();
+    });
   }
 
   // ### input_focusout_handler
