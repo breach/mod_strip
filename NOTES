@@ -19,3 +19,14 @@ DONE:
 - Basic implementation as a module
 - Basic New Tab and New Tab API
 
+
+/******************************************************************************/
+/* NOTES(spolu) */
+/******************************************************************************/
+
+// TAGS
+git tag v0.2.5-alpha.3
+git push --tags
+
+git tag -d v0.2.3-alpha.2
+git push origin :refs/tags/v0.2.3-alpha.2
