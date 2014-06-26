@@ -118,6 +118,5 @@ var bootstrap = function(http_srv) {
 
 
 process.on('uncaughtException', function (err) {
-  console.log('BOOM');
   common.fatal(err);
 });

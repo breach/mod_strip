@@ -28,7 +28,6 @@
       var devtools_url = '/devtools/blank.html';
       var socket = io.connect();
       socket.on('state', function(state) {
-        console.log(state);
         if(state) {
           if(state.devtools_url !== devtools_url) {
             devtools_url = state.devtools_url;
