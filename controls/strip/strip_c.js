@@ -83,6 +83,8 @@ var strip_c = function(spec, my) {
       .append($('<div/>')
         .addClass('separator'))
       .append($('<div/>')
+        .addClass('back-loading'))
+      .append($('<div/>')
         .addClass('loading'))
       .append($('<div/>')
         .addClass('favicon'))
@@ -181,9 +183,6 @@ var strip_c = function(spec, my) {
             tab.find('.loading').css({
               'background-color': 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')'
             });
-            tab.css({
-              'box-shadow': 'inset 0 -4px 0 hsl(0, 0%, 97%)'
-            });
           }
         }
       }
@@ -195,9 +194,6 @@ var strip_c = function(spec, my) {
         if(tab.favicon_need_color) {
           tab.find('.loading').css({
             'background-color': ''
-          });
-          tab.css({
-            'box-shadow': 'none'
           });
         }
       }
@@ -216,13 +212,13 @@ var strip_c = function(spec, my) {
     /* Update loading. */
     if(desc.loading && !tab.loading) {
       tab.find('.loading').css({
-        'transition': 'opacity 0.2s',
+        'transition': '',
         'right': my.TAB_WIDTH + 'px'
       });
       var value = 10;
       var update = function() {
         tab.find('.loading').css({
-          'transition': 'right 0.2s ease-out, opacity 0.2s',
+          'transition': 'right 0.2s ease-out',
           'right': Math.floor(my.TAB_WIDTH - my.TAB_WIDTH * value / 100) + 'px'
         });
       }
