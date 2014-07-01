@@ -366,8 +366,6 @@ var strip_c = function(spec, my) {
       else {
         my.strip_el.removeClass('module_update');
       }
-      console.log(state.breach_update);
-      console.log(state.module_update);
     }
   };
 
@@ -382,7 +380,6 @@ var strip_c = function(spec, my) {
   // ```
   select_tab = function(tab_id) {
     if(tab_id !== my.active) {
-      //console.log('select_tab: ' + id);
       my.socket.emit('select', tab_id);
     }
   };

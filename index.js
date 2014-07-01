@@ -80,12 +80,10 @@ var bootstrap = function(http_srv) {
       var name_r = /^_(.*)$/;
       var name_m = name_r.exec(name);
       if(name_m && common._[name_m[1]]) {
-        console.log('HANDSHAKE: ' + name);
         common._[name_m[1]].handshake(socket);
       }
     });
   });
-  console.log('BOOTSTRAP DONE');
 };
 
 /******************************************************************************/
