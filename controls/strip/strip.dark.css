@@ -20,10 +20,6 @@
   color: white;
 }
 
-.strip.dark .tabs .tab > div.separator {
-  background-color: hsl(0, 0%, 34%);
-}
-
 .strip.dark .tabs .tab > div.loading {
   background-color: hsl(0, 0%, 0%);
 }

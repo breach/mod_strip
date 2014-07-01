@@ -48,6 +48,7 @@ var strip_c = function(spec, my) {
   var cmd_back;           /* cmd_back(); */
   var cmd_forward;        /* cmd_forward(); */
   var cmd_new;            /* cmd_new(); */
+  var cmd_update;         /* cmd_update(); */
 
   var init;               /* init(); */
   
@@ -80,8 +81,6 @@ var strip_c = function(spec, my) {
       .click(function() {
         select_tab(tab_id);
       })
-      .append($('<div/>')
-        .addClass('separator'))
       .append($('<div/>')
         .addClass('back-loading'))
       .append($('<div/>')
@@ -353,6 +352,22 @@ var strip_c = function(spec, my) {
       tabs_order.forEach(function(tab_id) {
         update_tab(tab_id, tabs_data[tab_id]);
       });
+
+      /* Update update state. */
+      if(state.breach_update) {
+        my.strip_el.addClass('breach_update');
+      }
+      else {
+        my.strip_el.removeClass('breach_update');
+      }
+      if(state.module_update) {
+        my.strip_el.addClass('module_update');
+      }
+      else {
+        my.strip_el.removeClass('module_update');
+      }
+      console.log(state.breach_update);
+      console.log(state.module_update);
     }
   };
 
@@ -403,6 +418,13 @@ var strip_c = function(spec, my) {
     my.socket.emit('new');
   };
 
+  // ### cmd_update
+  //
+  // Open the module manager
+  cmd_update = function() {
+    my.socket.emit('update');
+  };
+
   // ### init
   //
   // Initialises the controller
@@ -424,6 +446,7 @@ var strip_c = function(spec, my) {
   that.cmd_back = cmd_back;
   that.cmd_forward = cmd_forward;
   that.cmd_new = cmd_new;
+  that.cmd_update = cmd_update;
 
   that.init = init;
 

@@ -1,6 +1,6 @@
 {
   "name": "mod_layout",
-  "version": "0.2.5-alpha.3",
+  "version": "0.2.6-alpha.3",
   "main": "./index.js",
   "dependencies": {
     "breach_module": "0.3.x",

@@ -20,11 +20,6 @@
   color: hsl(0, 0%, 20%);
 }
 
-.strip.light .tabs .tab > div.separator {
-  background-color: hsl(0, 0%, 64%);
-  width: 0px;
-}
-
 .strip.light .tabs .tab.active { 
   background-color: hsl(0, 0%, 96%);
 }

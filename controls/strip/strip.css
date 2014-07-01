@@ -34,6 +34,11 @@
   margin-top: 17px;
   font-size: 0.9em;
 }
+.strip .command .fa-icon {
+  display: inline-block;
+  margin-top: 15px;
+  font-size: 1.2em;
+}
 
 .strip .command.back {
   left: 0;
@@ -54,6 +59,22 @@
 }
 .strip .command.new:hover {
   color: hsl(100, 50%, 50%);
+}
+
+.strip .command.update {
+  display: none;
+  right: 0px;
+}
+.strip.breach_update .command.update {
+  color: hsl(0, 100%, 50%);
+  display: block;
+}
+.strip.module_update .command.update {
+  color: hsl(20, 100%, 50%);
+  display: block;
+}
+.strip .command.update:hover {
+  color: hsl(20, 0%, 50%);
 }
 
 .strip .box {
@@ -83,6 +104,11 @@
   overflow: hidden;
 }
 
+.strip.breach_update .wrapper,
+.strip.module_update .wrapper {
+  right: 28px;
+}
+
 .strip .tabs {
   position: absolute;
   top: 0;
@@ -102,16 +128,6 @@
 
   cursor: pointer;
   transition: left 0.1s;
-}
-
-.strip .tabs .tab > div.separator {
-  position: absolute;
-  top: 8px;
-  bottom: 12px;
-  left: 0;
-  width: 1px;
-
-  background-color: hsl(0, 0%, 34%);
 }
 
 .strip .tabs .tab > div.back-loading {

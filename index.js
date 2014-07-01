@@ -45,6 +45,9 @@ var bootstrap = function(http_srv) {
   breach.register('core', 'tabs:.*');
   breach.register('core', 'controls:keyboard');
 
+  breach.register('core', 'auto_update:.*');
+  breach.register('core', 'modules:.*');
+
   breach.expose('init', function(src, args, cb_) {
     //console.log('INIT RPC_CALL: FROM: ' + src);
     async.parallel([
