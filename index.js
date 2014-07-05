@@ -1,5 +1,5 @@
 /*
- * Breach: [mod_layout] index.js
+ * Breach: [mod_strip] index.js
  *
  * Copyright (c) 2014, Stanislas Polu. All rights reserved.
  *
@@ -9,6 +9,8 @@
  * - 2014-06-04 spolu   Move to `mod_layout`
  * - 2014-01-17 spolu   Creation
  */
+"use strict"
+
 var express = require('express');
 var http = require('http');
 var common = require('./lib/common.js');
@@ -41,7 +43,7 @@ var bootstrap = function(http_srv) {
   };
 
   breach.register('.*', 'devtools');
-  breach.register('mod_layout', 'box_.*');
+  breach.register('mod_strip', 'box_.*');
   breach.register('core', 'tabs:.*');
   breach.register('core', 'controls:keyboard');
 

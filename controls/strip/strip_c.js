@@ -1,5 +1,5 @@
 /*
- * Breach: [mod_layout] strip_c.js
+ * Breach: [mod_strip] strip_c.js
  *
  * Copyright (c) 2014, Stanislas Polu. All rights reserved.
  *
