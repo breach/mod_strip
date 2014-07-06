@@ -270,7 +270,7 @@ var strip_c = function(spec, my) {
       else if(-tabs_left > idx * (my.TAB_WIDTH + my.TAB_MARGIN)) {
         my.tabs_el.css({ 
           'transition': 'left 0.2s',
-          'left': (idx * (my.TAB_WIDTH + my.TAB_MARGIN)) + 'px'
+          'left': -(idx * (my.TAB_WIDTH + my.TAB_MARGIN)) + 'px'
         });
       }
     }
