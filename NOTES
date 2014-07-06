@@ -3,7 +3,6 @@
 /******************************************************************************/
 
 >>>v0.x<<<
-- TODO(spolu): Tabs search (cf mod_box)
 - TODO(spolu): Access to Navigation State from stack
 - TODO(spolu): Optimise display of navigation state (title, loading, favicon)
 - TODO(spolu): UI Controls (stack hide, back, forward, ...)
@@ -11,7 +10,7 @@
 DONE:
 
 >>v0.2<<
-- 
+- Tabs search (cf mod_box)
 
 >>v0.1<<
 - Tabs on `core_store`
