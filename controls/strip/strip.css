@@ -133,7 +133,7 @@
   overflow: hidden;
 
   cursor: pointer;
-  /* transition: left 0.1s; */
+  transition: left 0.1s;
 }
 
 .strip .tabs .tab > div.back-loading {

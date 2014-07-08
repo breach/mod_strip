@@ -6,7 +6,7 @@
  * @author: spolu
  *
  * @log:
- * - 2014-07-08 spolu  Fix close hover (animation) and disable actions #7 #11
+ * - 2014-07-08 spolu  Disable actions when not available #11
  * - 2014-06-16 spolu  Tabs filtering
  * - 2014-06-13 spolu  Remove favicon on navigation #2
  * - 2014-06-13 spolu  Loading progress dumpling
