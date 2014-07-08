@@ -46,12 +46,18 @@
 .strip .command.back:hover {
   color: hsl(200, 50%, 50%);
 }
+.strip .command.back.disabled {
+  color: hsl(0, 0%, 80%) !important;
+}
 
 .strip .command.forward {
   left: 28px;
 }
 .strip .command.forward:hover {
   color: hsl(200, 50%, 50%);
+}
+.strip .command.forward.disabled {
+  color: hsl(0, 0%, 80%) !important;
 }
 
 .strip .command.new {

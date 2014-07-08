@@ -6,6 +6,7 @@
  * @author: spolu
  *
  * @log:
+ * - 2014-07-08 spolu  Fix close hover (animation) and disable actions #7 #11
  * - 2014-06-16 spolu  Tabs filtering
  * - 2014-06-13 spolu  Remove favicon on navigation #2
  * - 2014-06-13 spolu  Loading progress dumpling
@@ -29,6 +30,8 @@ var strip_c = function(spec, my) {
   my.strip_el = spec.strip_el || $('.strip');
   my.wrapper_el = my.strip_el.find('.wrapper');
   my.tabs_el = my.strip_el.find('.tabs');
+  my.back_el = my.strip_el.find('.command.back');
+  my.forward_el = my.strip_el.find('.command.forward');
 
   my.TAB_WIDTH = 170;
   my.TAB_MARGIN = 0;
@@ -152,8 +155,18 @@ var strip_c = function(spec, my) {
     tab.find('.title').text(desc.title);
 
     /* Update active state. */
-    if(my.active === tab_id)
+    if(my.active === tab_id) {
       tab.addClass('active');
+      my.back_el.addClass('disabled');
+      my.forward_el.addClass('disabled');
+      if(data.state && data.state.can_go_back) {
+        my.back_el.removeClass('disabled');
+      }
+      if(data.state && data.state.can_go_forward) {
+        console.log(data);
+        my.forward_el.removeClass('disabled');
+      }
+    }
 
     /* Update favicon. */
     var favicon_el = tab.find('.favicon');
