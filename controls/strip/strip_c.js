@@ -263,13 +263,11 @@ var strip_c = function(spec, my) {
 
       if((idx + 1) * (my.TAB_WIDTH + my.TAB_MARGIN) + tabs_left > my.wrapper_el.width()) {
         my.tabs_el.css({ 
-          'transition': 'left 0.2s',
           'left': (my.wrapper_el.width() - (idx + 1) * (my.TAB_WIDTH + my.TAB_MARGIN)) + 'px'
         });
       }
       else if(-tabs_left > idx * (my.TAB_WIDTH + my.TAB_MARGIN)) {
         my.tabs_el.css({ 
-          'transition': 'left 0.2s',
           'left': -(idx * (my.TAB_WIDTH + my.TAB_MARGIN)) + 'px'
         });
       }
