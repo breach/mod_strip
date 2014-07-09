@@ -24,7 +24,7 @@
   background-color: hsl(0, 0%, 0%);
 }
 
-.strip .tabs .tab > div.back-loading {
+.strip.dark .tabs .tab > div.back-loading {
   background-color: hsl(0, 0%, 35%);
 }
 
