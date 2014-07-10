@@ -81,8 +81,15 @@ var strip_c = function(spec, my) {
     var tab = $('<div/>')
       .attr('id', tab_id)
       .addClass('tab')
-      .click(function() {
-        select_tab(tab_id);
+      .click(function(event) {
+        switch(event.which) {
+            case 1:
+              select_tab(tab_id);
+              break;
+            case 2:
+              close_tab(tab_id);
+              break;
+        }
       })
       .append($('<div/>')
         .addClass('back-loading'))
