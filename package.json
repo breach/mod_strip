@@ -1,6 +1,6 @@
 {
   "name": "mod_strip",
-  "version": "0.2.7-alpha.4",
+  "version": "0.2.8-alpha.4",
   "main": "./index.js",
   "dependencies": {
     "breach_module": "0.3.x",

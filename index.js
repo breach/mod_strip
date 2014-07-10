@@ -42,34 +42,35 @@ var bootstrap = function(http_srv) {
     })
   };
 
-  breach.register('.*', 'devtools');
-  breach.register('mod_strip', 'box_.*');
-  breach.register('core', 'tabs:.*');
-  breach.register('core', 'controls:keyboard');
-
-  breach.register('core', 'auto_update:.*');
-  breach.register('core', 'modules:.*');
-
-  breach.expose('init', function(src, args, cb_) {
-    //console.log('INIT RPC_CALL: FROM: ' + src);
-    async.parallel([
-      common._.box.init,
-      common._.tabs.init,
-      common._.strip.init,
-      //common._.stack.init,
-      common._.devtools.init
-    ], cb_);
-  });
-
-  breach.expose('kill', function(args, cb_) {
-    async.parallel([
-      common._.box.kill,
-      common._.tabs.kill,
-      common._.strip.kill,
-      //common._.stack.kill,
-      common._.devtools.kill
-    ], function(err) {
-      common.exit(0);
+  breach.init(function() {
+    breach.register('.*', 'devtools');
+    breach.register('mod_strip', 'box_.*');
+    breach.register('core', 'tabs:.*');
+    breach.register('core', 'controls:keyboard');
+  
+    breach.register('core', 'auto_update:.*');
+    breach.register('core', 'modules:.*');
+  
+    breach.expose('init', function(src, args, cb_) {
+      async.parallel([
+        common._.box.init,
+        common._.tabs.init,
+        common._.strip.init,
+        //common._.stack.init,
+        common._.devtools.init
+      ], cb_);
+    });
+  
+    breach.expose('kill', function(args, cb_) {
+      async.parallel([
+        common._.box.kill,
+        common._.tabs.kill,
+        common._.strip.kill,
+        //common._.stack.kill,
+        common._.devtools.kill
+      ], function(err) {
+        common.exit(0);
+      });
     });
   });
 
