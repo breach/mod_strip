@@ -81,7 +81,7 @@ var strip_c = function(spec, my) {
     var tab = $('<div/>')
       .attr('id', tab_id)
       .addClass('tab')
-      .mousedown(function(event) {
+      .click(function(event) {
         switch(event.which){
             case 1:
               select_tab(tab_id);
