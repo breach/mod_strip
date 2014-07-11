@@ -158,6 +158,10 @@
   opacity: 0;
 }
 
+.strip .tabs .tab:hover > div.loading {
+  opacity: 0.7;
+}
+
 .strip .tabs .tab.active > div.loading {
   opacity: 1.0;
 }
