@@ -6,8 +6,8 @@
     "breach_module": "0.3.x",
     "async": "0.9.x",
     "express": "4.5.x",
-    "body-parser": "1.0.x",
-    "method-override": "1.0.x",
+    "body-parser": "1.4.x",
+    "method-override": "2.1.x",
     "socket.io": "1.0.x",
     "request": "2.36.x"
   }
