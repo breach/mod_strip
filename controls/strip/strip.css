@@ -155,7 +155,7 @@
   right: 0;
 
   z-index: 100;
-  opacity: 0;
+  opacity: 0.3;
 }
 
 .strip .tabs .tab.active > div.loading {
