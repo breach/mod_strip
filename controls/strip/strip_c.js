@@ -50,11 +50,12 @@ var strip_c = function(spec, my) {
 
   var cmd_back;           /* cmd_back(); */
   var cmd_forward;        /* cmd_forward(); */
+  var cmd_reload;         /* cmd_reload(); */
   var cmd_new;            /* cmd_new(); */
   var cmd_update;         /* cmd_update(); */
 
   var init;               /* init(); */
-  
+
   //
   // ### _private_
   //
@@ -184,7 +185,7 @@ var strip_c = function(spec, my) {
       if(desc.favicon && desc.favicon.length > 0) {
         favicon_el.css('display', 'block');
         content_el.addClass('with-favicon');
-        favicon_el.css('background-image', 
+        favicon_el.css('background-image',
                         'url(' + desc.favicon + ')');
         if(tab.favicon_need_color) {
           var proxied_img_url = null;
@@ -208,7 +209,7 @@ var strip_c = function(spec, my) {
       else {
         favicon_el.css('display', 'none');
         content_el.removeClass('with-favicon');
-        favicon_el.css('background-image', 
+        favicon_el.css('background-image',
                         'none');
         if(tab.favicon_need_color) {
           tab.find('.loading').css({
@@ -282,12 +283,12 @@ var strip_c = function(spec, my) {
       var tabs_left = my.tabs_el.position().left;
 
       if((idx + 1) * (my.TAB_WIDTH + my.TAB_MARGIN) + tabs_left > my.wrapper_el.width()) {
-        my.tabs_el.css({ 
+        my.tabs_el.css({
           'left': (my.wrapper_el.width() - (idx + 1) * (my.TAB_WIDTH + my.TAB_MARGIN)) + 'px'
         });
       }
       else if(-tabs_left > idx * (my.TAB_WIDTH + my.TAB_MARGIN)) {
-        my.tabs_el.css({ 
+        my.tabs_el.css({
           'left': -(idx * (my.TAB_WIDTH + my.TAB_MARGIN)) + 'px'
         });
       }
@@ -326,7 +327,7 @@ var strip_c = function(spec, my) {
     if(update > 0) {
       update = 0;
     }
-    my.tabs_el.css({ 
+    my.tabs_el.css({
       'transition': 'none',
       'left': (update) + 'px'
     });
@@ -428,6 +429,13 @@ var strip_c = function(spec, my) {
 
   // ### cmd_back
   //
+  // Issue a reload command
+  cmd_reload = function() {
+    my.socket.emit('reload');
+  };
+
+  // ### cmd_back
+  //
   // Issue a new tab command
   cmd_new = function() {
     my.socket.emit('new');
@@ -460,6 +468,7 @@ var strip_c = function(spec, my) {
 
   that.cmd_back = cmd_back;
   that.cmd_forward = cmd_forward;
+  that.cmd_reload = cmd_reload;
   that.cmd_new = cmd_new;
   that.cmd_update = cmd_update;
 
