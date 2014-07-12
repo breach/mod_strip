@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 45px;
+  height: 35px;
   padding: 0;
 
   overflow: hidden;
@@ -23,7 +23,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 28px;
+  width: 2.5%;
 
   cursor: pointer;
   text-align: center;
@@ -31,9 +31,19 @@
 }
 
 .strip .command .icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+
   display: inline-block;
-  margin-top: 17px;
+  margin: auto;
+  width: 1rem;
+  height: 1rem;
+
   font-size: 0.9em;
+  text-align: center;
 }
 .strip .command .fa-icon {
   display: inline-block;
@@ -52,7 +62,7 @@
 }
 
 .strip .command.forward {
-  left: 28px;
+  left: 2.5%;
 }
 .strip .command.forward:hover {
   color: hsl(200, 50%, 50%);
@@ -62,7 +72,7 @@
 }
 
 .strip .command.new {
-  left: 396px;
+  left: 35%;
 }
 .strip .command.new:hover {
   color: hsl(100, 50%, 50%);
@@ -89,8 +99,8 @@
 
   top: 0;
   bottom: 0;
-  left: 56px;
-  width: 340px;
+  left: 5%;
+  width: 30%;
 
   overflow: hidden;
 }
@@ -104,9 +114,10 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 424px;
+  left: 37.5%;
   right: 0;
   padding: 0;
+
 
   overflow: hidden;
 }
@@ -126,8 +137,8 @@
 
 .strip .tabs .tab {
   position: absolute;
-  max-width: 170px;
-  min-width: 170px;
+  max-width: 140px;
+  min-width: 140px;
   top: 0;
   bottom: 0;
 
@@ -135,6 +146,8 @@
 
   cursor: pointer;
   transition: left 0.1s;
+
+  line-height: 36px;
 }
 
 .strip .tabs .tab > div.back-loading {
@@ -172,8 +185,11 @@
   display: none;
   vertical-align: top;
 
-  top: 14px;
+  top: 0;
+  bottom: 4px;
   left: 7px;
+
+  margin: auto;
   height: 18px;
   width: 18px;
 
@@ -189,38 +205,51 @@
 }
 
 .strip .tabs .tab > div.content {
-  position: absolute;
   display: block;
-  left: 7px;
-  right: 5px;
-  top: 2px;
-  bottom: 5px;
-  vertical-align: top;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding-left: 10px;
+  padding-right: 10px;
 
   overflow: hidden;
+
+  transition: padding 150ms;
 }
 
 .strip .tabs .tab > div.content.with-favicon {
-  left: 32px;
+  padding-left: 32px;
 }
 .strip .tabs .tab:hover > div.content {
+  padding-right: 25px;
+}
+.strip .tabs .tab:hover > div.content .shadow {
   right: 25px;
 }
 
 .strip .tabs .tab > div.content .shadow {
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
+  right: 0px;
   bottom: 0;
   z-index: 10;
+
+  width: 6px;
+  
+  transition: right 150ms;
 }
 
 .strip .tabs .tab > div.content .title {
-  margin-top: 14px;
+  display: block;
   font-weight: normal;
   white-space: nowrap;
   z-index: 5;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .strip .tabs .tab.active > div.content .title {
@@ -228,24 +257,34 @@
 }
 
 .strip .tabs .tab > div.close {
-  display:none;
+  display: block;
   position: absolute;
-  top: 15px;
-  bottom: 15px;
+  top: 0;
   right: 0;
+  bottom: 0px;
+
+  margin: auto;
   width: 25px;
 
   font-size: 0.8em;
   cursor: pointer;
+
+  opacity: 0;
+
+  transition: opacity 150ms;
 }
 .strip .tabs .tab:hover > div.close {
-  display: block;
+  opacity: 1;
+  transition-delay: 75ms;
 }
 .strip .tabs .tab > div.close:hover {
   color: hsl(0, 50%, 50%) !important;
 }
 .strip .tabs .tab > div.close > div {
-  margin-top: 3px;
-  margin-left: 5px;
+  padding-bottom: 4px;
+  width: 25px;
+  height: 31px;
+  line-height: 35px;
+  text-align: center;
 }
 

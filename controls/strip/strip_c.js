@@ -33,7 +33,7 @@ var strip_c = function(spec, my) {
   my.back_el = my.strip_el.find('.command.back');
   my.forward_el = my.strip_el.find('.command.forward');
 
-  my.TAB_WIDTH = 170;
+  my.TAB_WIDTH = 140;
   my.TAB_MARGIN = 0;
 
   /* Dictionary of tabs div elements. */
@@ -159,7 +159,7 @@ var strip_c = function(spec, my) {
     }
 
     /* Update title. */
-    tab.find('.title').text(desc.title);
+    tab.find('.title').text(desc.title).attr('title',desc.title + ' - ' + desc.url);
 
     /* Update active state. */
     if(my.active === tab_id) {
