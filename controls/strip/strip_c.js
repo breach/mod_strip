@@ -105,7 +105,7 @@ var strip_c = function(spec, my) {
           .addClass('title')))
       .append($('<div/>')
         .addClass('close')
-        .click(function() {
+        .mousedown(function() {
           close_tab(tab_id);
         })
         .append($('<div/>')
