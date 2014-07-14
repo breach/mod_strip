@@ -11,8 +11,8 @@
   position: absolute;
   left: 7px;
   width: 10px;
-  top: 10px;
-  bottom: 10px;
+  top: 8px;
+  bottom: 12px;
 
   font-size: 1.2em;
 }
@@ -31,8 +31,8 @@
   position: absolute;
   left: 7px;
   width: 10px;
-  top: 10px;
-  bottom: 10px;
+  top: 8px;
+  bottom: 12px;
 
   font-size: 1.2em;
 }
@@ -83,7 +83,7 @@
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 2px;
   outline: none !important;
   border: 0;
   padding: 0;
@@ -110,7 +110,7 @@
   right: 0;
   bottom: 0;
 
-  padding-top: 11px;
+  padding-top: 9px;
 
   border: 0;
   z-index: 2;

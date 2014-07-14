@@ -31,12 +31,12 @@
 
 .strip .command .icon {
   display: inline-block;
-  margin-top: 17px;
+  margin-top: 15px;
   font-size: 0.9em;
 }
 .strip .command .fa-icon {
   display: inline-block;
-  margin-top: 15px;
+  margin-top: 12px;
   font-size: 1.2em;
 }
 
@@ -167,7 +167,7 @@
   display: none;
   vertical-align: top;
 
-  top: 14px;
+  top: 13px;
   left: 7px;
   height: 18px;
   width: 18px;
@@ -212,7 +212,7 @@
 }
 
 .strip .tabs .tab > div.content .title {
-  margin-top: 14px;
+  margin-top: 12px;
   font-weight: normal;
   white-space: nowrap;
   z-index: 5;
