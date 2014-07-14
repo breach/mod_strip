@@ -13,7 +13,6 @@
 .strip.light .box {
   background-color: hsl(0, 0%, 100%);
   border-bottom: 4px solid hsl(0, 0%, 85%);
-  border-top: 5px solid hsl(0, 0%, 100%);
 }
 
 .strip.light .tabs .tab {

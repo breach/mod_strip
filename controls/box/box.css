@@ -9,10 +9,13 @@
 
 .box .ssl {
   position: absolute;
+  top: 0;
   left: 7px;
-  width: 10px;
-  top: 10px;
-  bottom: 10px;
+  bottom: 0;
+
+  margin: auto;
+  width: 12px;
+  height: 14px;
 
   font-size: 1.2em;
 }
@@ -29,10 +32,13 @@
   display: none;
 
   position: absolute;
+  top: 0;
   left: 7px;
-  width: 10px;
-  top: 10px;
-  bottom: 10px;
+  bottom: 0;
+
+  margin: auto;
+  width: 12px;
+  height: 14px;
 
   font-size: 1.2em;
 }
@@ -99,6 +105,7 @@
 .box .input:hover form input {
   opacity: 1;
   font-weight: bold;
+  line-height: 34px;
   -webkit-font-smoothing: antialiased !important;
 }
 
@@ -110,11 +117,15 @@
   right: 0;
   bottom: 0;
 
-  padding-top: 11px;
+  line-height: 34px;
 
   border: 0;
   z-index: 2;
   white-space: nowrap;
+}
+
+.box .input .glass span {
+  display: inline-block;
 }
 
 .box .input .glass .host {
