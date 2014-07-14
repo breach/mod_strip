@@ -170,7 +170,6 @@ var strip_c = function(spec, my) {
         my.back_el.removeClass('disabled');
       }
       if(data.state && data.state.can_go_forward) {
-        console.log(data);
         my.forward_el.removeClass('disabled');
       }
     }
