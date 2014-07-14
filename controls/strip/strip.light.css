@@ -38,7 +38,6 @@
 .strip.light .tabs .tab > div.content .title {
   color: hsl(0, 0%, 10%);
   font-weight: normal !important;
-  font-size: 0.9em;
 }
 .strip.light .tabs .tab.active > div.content .title {
   color: hsl(0, 0%, 10%);
