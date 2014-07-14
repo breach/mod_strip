@@ -8,6 +8,7 @@
   padding: 0;
 
   overflow: hidden;
+  -webkit-user-select: none;
 }
 
 .strip .bottom {
@@ -156,6 +157,10 @@
 
   z-index: 100;
   opacity: 0;
+}
+
+.strip .tabs .tab:hover > div.loading {
+  opacity: 0.7;
 }
 
 .strip .tabs .tab.active > div.loading {

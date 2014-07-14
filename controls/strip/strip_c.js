@@ -54,7 +54,7 @@ var strip_c = function(spec, my) {
   var cmd_update;         /* cmd_update(); */
 
   var init;               /* init(); */
-  
+
   //
   // ### _private_
   //
@@ -64,6 +64,7 @@ var strip_c = function(spec, my) {
   var remove_tab;         /* update_tab(tab_id); */
 
   var mousewheel_handler; /* mousewheel_handler(evt); */
+  var dblclick_handler;   /* dblclick_handler(evt); */
   var state_handler;      /* state_handler(state); */
 
   var that = {};
@@ -81,8 +82,15 @@ var strip_c = function(spec, my) {
     var tab = $('<div/>')
       .attr('id', tab_id)
       .addClass('tab')
-      .click(function() {
-        select_tab(tab_id);
+      .mousedown(function(event) {
+        switch(event.which) {
+            case 1:
+              select_tab(tab_id);
+              break;
+            case 2:
+              close_tab(tab_id);
+              break;
+        }
       })
       .append($('<div/>')
         .addClass('back-loading'))
@@ -98,7 +106,7 @@ var strip_c = function(spec, my) {
           .addClass('title')))
       .append($('<div/>')
         .addClass('close')
-        .click(function() {
+        .mousedown(function() {
           close_tab(tab_id);
         })
         .append($('<div/>')
@@ -163,7 +171,6 @@ var strip_c = function(spec, my) {
         my.back_el.removeClass('disabled');
       }
       if(data.state && data.state.can_go_forward) {
-        console.log(data);
         my.forward_el.removeClass('disabled');
       }
     }
@@ -177,7 +184,7 @@ var strip_c = function(spec, my) {
       if(desc.favicon && desc.favicon.length > 0) {
         favicon_el.css('display', 'block');
         content_el.addClass('with-favicon');
-        favicon_el.css('background-image', 
+        favicon_el.css('background-image',
                         'url(' + desc.favicon + ')');
         if(tab.favicon_need_color) {
           var proxied_img_url = null;
@@ -201,7 +208,7 @@ var strip_c = function(spec, my) {
       else {
         favicon_el.css('display', 'none');
         content_el.removeClass('with-favicon');
-        favicon_el.css('background-image', 
+        favicon_el.css('background-image',
                         'none');
         if(tab.favicon_need_color) {
           tab.find('.loading').css({
@@ -275,12 +282,12 @@ var strip_c = function(spec, my) {
       var tabs_left = my.tabs_el.position().left;
 
       if((idx + 1) * (my.TAB_WIDTH + my.TAB_MARGIN) + tabs_left > my.wrapper_el.width()) {
-        my.tabs_el.css({ 
+        my.tabs_el.css({
           'left': (my.wrapper_el.width() - (idx + 1) * (my.TAB_WIDTH + my.TAB_MARGIN)) + 'px'
         });
       }
       else if(-tabs_left > idx * (my.TAB_WIDTH + my.TAB_MARGIN)) {
-        my.tabs_el.css({ 
+        my.tabs_el.css({
           'left': -(idx * (my.TAB_WIDTH + my.TAB_MARGIN)) + 'px'
         });
       }
@@ -319,10 +326,21 @@ var strip_c = function(spec, my) {
     if(update > 0) {
       update = 0;
     }
-    my.tabs_el.css({ 
+    my.tabs_el.css({
       'transition': 'none',
       'left': (update) + 'px'
     });
+  };
+  // ### dblclick_handler
+  //
+  // Handles the dblclick events to add a new tab
+  // ```
+  // @evt {object} the jquery event
+  // ```
+  dblclick_handler = function(evt) {
+    var el = evt.target;
+    for (;el && el !== document.body; el = el.parentNode) if (el.classList.contains('tabs')) return;
+    cmd_new();
   };
 
   /**************************************************************************/
@@ -438,6 +456,7 @@ var strip_c = function(spec, my) {
   // Initialises the controller
   init = function() {
     my.wrapper_el.bind('mousewheel', mousewheel_handler);
+    my.wrapper_el.bind('dblclick', dblclick_handler);
     my.socket = io();
     my.socket.on('connect', function() {
       my.socket.on('state', state_handler);
