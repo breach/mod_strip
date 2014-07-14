@@ -38,7 +38,7 @@
 .strip.light .tabs .tab > div.content .title {
   color: hsl(0, 0%, 10%);
   font-weight: normal !important;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 .strip.light .tabs .tab.active > div.content .title {
   color: hsl(0, 0%, 10%);
