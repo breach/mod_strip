@@ -60,6 +60,11 @@
     <!-- Main -->
     <script type="text/javascript">
       var strip = strip_c({ strip_el: $('.strip') }).init();
+      $.getJSON('/settings', function(data) {
+        if (data.antialiasing === false) {
+          $('html').css('-webkit-font-smoothing', 'auto');
+        }
+      });
     </script>
   </body>
 </html>
