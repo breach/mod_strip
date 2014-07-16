@@ -104,7 +104,7 @@ var bootstrap = function(http_srv) {
 
   /* App Configuration */
   app.use('/', express.static(__dirname + '/controls'));
-  app.use(require('body-parser')());
+  app.use(require('body-parser').json());
   app.use(require('method-override')())
 
   app.get('/proxy', function(req, res, next) {
