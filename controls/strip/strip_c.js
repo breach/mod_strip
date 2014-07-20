@@ -33,7 +33,7 @@ var strip_c = function(spec, my) {
   my.back_el = my.strip_el.find('.command.back');
   my.forward_el = my.strip_el.find('.command.forward');
 
-  my.TAB_WIDTH = 170;
+  my.MAX_TAB_WIDTH = 170;
   my.TAB_MARGIN = 0;
 
   /* Dictionary of tabs div elements. */
@@ -58,6 +58,7 @@ var strip_c = function(spec, my) {
   //
   // ### _private_
   //
+  var calc_tab_width;     /* calc_tab_width() */
   var create_tab;         /* create_tab(tab_id); */
   var update_tab;         /* update_tab(tab_id, data); */
   var position_tab;       /* update_tab(tab_id, idx); */
@@ -72,6 +73,21 @@ var strip_c = function(spec, my) {
   /****************************************************************************/
   /* PRIVATE HELPERS */
   /****************************************************************************/
+  // ### calc_tab_width
+  //
+  // Calculates the proper tab width based on the number 
+  // of tabs open and the MAX_TAB_WIDTH. This only happens
+  // if the tabs container has the 'resizable' class
+  calc_tab_width = function() {
+    if(!$('.tabs.resizable').length) return my.MAX_TAB_WIDTH;
+    var tab_container = $('.strip .wrapper');
+    var num_tabs = tab_container.find('.tab').length;
+    var width = Math.min(my.MAX_TAB_WIDTH, tab_container.width()/num_tabs);
+    // We also need to change the css min-width property too
+    $('.strip .tabs .tab').css({ "min-width": width });
+    return width;
+  }
+
   // ### create_tab
   //
   // Creates a new tab div element with the specified id
@@ -232,13 +248,13 @@ var strip_c = function(spec, my) {
     if(desc.loading && !tab.loading) {
       tab.find('.loading').css({
         'transition': '',
-        'right': my.TAB_WIDTH + 'px'
+        'right': calc_tab_width() + 'px'
       });
       var value = 10;
       var update = function() {
         tab.find('.loading').css({
           'transition': 'right 0.2s ease-out',
-          'right': Math.floor(my.TAB_WIDTH - my.TAB_WIDTH * value / 100) + 'px'
+          'right': Math.floor(calc_tab_width() - calc_tab_width() * value / 100) + 'px'
         });
       }
       setTimeout(function() {
@@ -248,7 +264,7 @@ var strip_c = function(spec, my) {
       }, 100);
       var itv = setInterval(function() {
         if(tab.loading) {
-          var dumpling = Math.exp(- value / (my.TAB_WIDTH - value));
+          var dumpling = Math.exp(- value / (calc_tab_width() - value));
           value = Math.min(Math.floor(value + dumpling * Math.random() * 20), 100);
           update();
         }
@@ -275,20 +291,20 @@ var strip_c = function(spec, my) {
   // ```
   position_tab = function(tab_id, idx) {
     var tab = my.tabs_divs[tab_id];
-    tab.css('left', idx * (my.TAB_WIDTH + my.TAB_MARGIN));
+    tab.css('left', idx * (calc_tab_width() + my.TAB_MARGIN));
     /* If this is the active tab, we make sure it is visible. */
     if(my.active === tab_id) {
-      var tabs_width = Object.keys(my.tabs_divs).length * (my.TAB_WIDTH + my.TAB_MARGIN);
+      var tabs_width = Object.keys(my.tabs_divs).length * (calc_tab_width() + my.TAB_MARGIN);
       var tabs_left = my.tabs_el.position().left;
 
-      if((idx + 1) * (my.TAB_WIDTH + my.TAB_MARGIN) + tabs_left > my.wrapper_el.width()) {
+      if((idx + 1) * (calc_tab_width() + my.TAB_MARGIN) + tabs_left > my.wrapper_el.width()) {
         my.tabs_el.css({
-          'left': (my.wrapper_el.width() - (idx + 1) * (my.TAB_WIDTH + my.TAB_MARGIN)) + 'px'
+          'left': (my.wrapper_el.width() - (idx + 1) * (calc_tab_width() + my.TAB_MARGIN)) + 'px'
         });
       }
-      else if(-tabs_left > idx * (my.TAB_WIDTH + my.TAB_MARGIN)) {
+      else if(-tabs_left > idx * (calc_tab_width() + my.TAB_MARGIN)) {
         my.tabs_el.css({
-          'left': -(idx * (my.TAB_WIDTH + my.TAB_MARGIN)) + 'px'
+          'left': -(idx * (calc_tab_width() + my.TAB_MARGIN)) + 'px'
         });
       }
     }
@@ -316,7 +332,7 @@ var strip_c = function(spec, my) {
   // @evt {object} the jquery event
   // ```
   mousewheel_handler = function(evt) {
-    var tabs_width = Object.keys(my.tabs_divs).length * (my.TAB_WIDTH + my.TAB_MARGIN);
+    var tabs_width = Object.keys(my.tabs_divs).length * (calc_tab_width() + my.TAB_MARGIN);
     var tabs_left = my.tabs_el.position().left;
 
     var update = tabs_left + evt.originalEvent.wheelDeltaX;
