@@ -6,6 +6,7 @@
  * @author: spolu
  *
  * @log:
+ * - 2014-07-22 spolu   Fix DNS error when not connected
  * - 2014-06-04 spolu   Move to `mod_layout`
  * - 2014-01-17 spolu   Creation
  */
@@ -108,7 +109,12 @@ var bootstrap = function(http_srv) {
   app.use(require('method-override')())
 
   app.get('/proxy', function(req, res, next) {
-    request(req.param('url')).pipe(res);
+    request(req.param('url')).on('error', function(err) {
+      /* We only log errors here (happen when not connected while trying to */
+      /* retrieve the favicon through the proxy.                            */
+      common.log.error(err);
+    })
+    .pipe(res);
   });
 
   var http_srv = http.createServer(app).listen(0, '127.0.0.1');
@@ -121,6 +127,6 @@ var bootstrap = function(http_srv) {
 })();
 
 
-process.on('uncaughtException', function (err) {
+process.on('uncaughtException', function(err) {
   common.fatal(err);
 });
