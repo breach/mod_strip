@@ -40,7 +40,8 @@ var bootstrap = function(http_srv) {
     */
     devtools: require('./lib/devtools.js').devtools({
       http_port: http_port
-    })
+    }),
+    defaults: require('./lib/defaults.json')
   };
 
   breach.init(function() {
@@ -54,6 +55,11 @@ var bootstrap = function(http_srv) {
   
     breach.expose('init', function(src, args, cb_) {
       async.parallel([
+        function(cb_) {
+          breach.module('core').call('settings_init', {
+            defaults: common._.defaults
+          }, cb_);
+        },
         common._.box.init,
         common._.tabs.init,
         common._.strip.init,
@@ -105,7 +111,7 @@ var bootstrap = function(http_srv) {
 
   /* App Configuration */
   app.use('/', express.static(__dirname + '/controls'));
-  app.use(require('body-parser')());
+  app.use(require('body-parser').json());
   app.use(require('method-override')())
 
   app.get('/proxy', function(req, res, next) {
@@ -115,6 +121,12 @@ var bootstrap = function(http_srv) {
       common.log.error(err);
     })
     .pipe(res);
+  });
+  
+  app.get('/settings', function(req, res, next) {
+    breach.module('core').call('settings_get', null, function(err, settings) {
+      res.json(settings);
+    });
   });
 
   var http_srv = http.createServer(app).listen(0, '127.0.0.1');
