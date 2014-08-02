@@ -1,6 +1,9 @@
 .box.dark .ssl {
   color: hsl(0, 0%, 15%);
 }
+.box.dark .search {
+  color: hsl(0, 100%, 100%);
+}
 
 .box.dark .input .shadow {
   background-color: hsl(0, 0%, 10%);
