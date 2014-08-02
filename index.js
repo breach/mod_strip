@@ -73,6 +73,11 @@ var bootstrap = function(http_srv) {
         common.exit(0);
       });
     });
+
+    breach.expose('add_bar', function(src, args, cb_) {
+       console.log("adding bar ", args.url + ':' + args.dimension);
+       common._.strip.addBar(args, cb_);
+    });
   });
 
   var io = require('socket.io').listen(http_srv, {

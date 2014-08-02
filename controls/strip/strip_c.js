@@ -28,6 +28,7 @@ var strip_c = function(spec, my) {
   spec = spec || {};
 
   my.strip_el = spec.strip_el || $('.strip');
+  my.bars_el = spec.bars_el || $('.bars');
   my.wrapper_el = my.strip_el.find('.wrapper');
   my.tabs_el = my.strip_el.find('.tabs');
   my.back_el = my.strip_el.find('.command.back');
@@ -38,6 +39,7 @@ var strip_c = function(spec, my) {
 
   /* Dictionary of tabs div elements. */
   my.tabs_divs = {};
+  my.bar_divs = {};
   my.active = null;
 
   my.color = color({});
@@ -62,6 +64,8 @@ var strip_c = function(spec, my) {
   var update_tab;         /* update_tab(tab_id, data); */
   var position_tab;       /* update_tab(tab_id, idx); */
   var remove_tab;         /* update_tab(tab_id); */
+
+  var create_bar;
 
   var mousewheel_handler; /* mousewheel_handler(evt); */
   var dblclick_handler;   /* dblclick_handler(evt); */
@@ -113,6 +117,17 @@ var strip_c = function(spec, my) {
           .addClass('icon-iconfont-01')));
     return tab;
   };
+
+  create_bar = function(bar) {
+      var bar = $('<iframe/>')
+          .attr('id', bar.id)
+          .attr('height', bar.dimension)
+          .attr('frameborder', 0)
+          .attr('scrolling', 'no')
+          .addClass('bar')
+          .attr('src', bar.url);
+      return bar;
+  }
 
   // ### update_tab
   //
@@ -354,6 +369,7 @@ var strip_c = function(spec, my) {
   // ```
   state_handler = function(state) {
     if(state) {
+      console.log('state update ' + state.bars);
       var tabs_data = {};
       var tabs_order = [];
       /* Create any missing tab. */
@@ -365,6 +381,15 @@ var strip_c = function(spec, my) {
           my.strip_el.find('.tabs').append(my.tabs_divs[t.tab_id]);
         }
       });
+      if(state.bars) {
+          console.log(state.bars.length);
+          state.bars.forEach(function (b) {
+              if(!my.bar_divs[b.id]) {
+                  my.bar_divs[b.id] = create_bar(b);
+                  my.bars_el.append(my.bar_divs[b.id]);
+              }
+          });
+      }
       /* Cleanup Closed tabs */
       Object.keys(my.tabs_divs).forEach(function(tab_id) {
         if(!tabs_data[tab_id]) {

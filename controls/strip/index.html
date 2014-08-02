@@ -52,6 +52,8 @@
         </div>
       </div>
     </div>
+    <div class="bars">
+    </div>
 
     <!-- Scripts -->
     <script src="/socket.io/socket.io.js"></script>
@@ -65,7 +67,9 @@
 
     <!-- Main -->
     <script type="text/javascript">
-      var strip = strip_c({ strip_el: $('.strip') }).init();
+      var strip = strip_c({
+          strip_el: $('.strip'),
+          bars_el: $('.bars')}).init();
     </script>
   </body>
 </html>
