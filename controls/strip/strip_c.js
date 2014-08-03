@@ -6,14 +6,15 @@
  * @author: spolu
  *
  * @log:
- * - 2014-07-08 spolu  Disable actions when not available #11
- * - 2014-06-16 spolu  Tabs filtering
- * - 2014-06-13 spolu  Remove favicon on navigation #2
- * - 2014-06-13 spolu  Loading progress dumpling
- * - 2014-06-11 spolu  Removed angularJS
- * - 2014-06-04 spolu  Forked from `mod_stack`
- * - 2014-05-21 spolu  New state format (tabs on core_state)
- * - 2013-08-15 spolu  Creation
+ * - 2014-08-03 gammagec Added add_bar to insert external module bars under the strip
+ * - 2014-07-08 spolu    Disable actions when not available #11
+ * - 2014-06-16 spolu    Tabs filtering
+ * - 2014-06-13 spolu    Remove favicon on navigation #2
+ * - 2014-06-13 spolu    Loading progress dumpling
+ * - 2014-06-11 spolu    Removed angularJS
+ * - 2014-06-04 spolu    Forked from `mod_stack`
+ * - 2014-05-21 spolu    New state format (tabs on core_state)
+ * - 2013-08-15 spolu    Creation
  */
 'use strict'
 
@@ -39,8 +40,10 @@ var strip_c = function(spec, my) {
 
   /* Dictionary of tabs div elements. */
   my.tabs_divs = {};
-  my.bar_divs = {};
   my.active = null;
+
+  /* Dictionary of child bars attached underneath the strip. */
+  my.bar_divs = {};
 
   my.color = color({});
 
@@ -64,8 +67,7 @@ var strip_c = function(spec, my) {
   var update_tab;         /* update_tab(tab_id, data); */
   var position_tab;       /* update_tab(tab_id, idx); */
   var remove_tab;         /* update_tab(tab_id); */
-
-  var create_bar;
+  var create_bar;         /* create_bar(bar); */
 
   var mousewheel_handler; /* mousewheel_handler(evt); */
   var dblclick_handler;   /* dblclick_handler(evt); */
@@ -118,6 +120,12 @@ var strip_c = function(spec, my) {
     return tab;
   };
 
+  // ### create_bar
+  //
+  // Creates a new bar div element with the specified id.
+  // ```
+  // @bar {object} bar data.
+  // ```
   create_bar = function(bar) {
       var bar = $('<iframe/>')
           .attr('id', bar.id)
@@ -369,7 +377,6 @@ var strip_c = function(spec, my) {
   // ```
   state_handler = function(state) {
     if(state) {
-      console.log('state update ' + state.bars);
       var tabs_data = {};
       var tabs_order = [];
       /* Create any missing tab. */
@@ -382,7 +389,6 @@ var strip_c = function(spec, my) {
         }
       });
       if(state.bars) {
-          console.log(state.bars.length);
           state.bars.forEach(function (b) {
               if(!my.bar_divs[b.id]) {
                   my.bar_divs[b.id] = create_bar(b);

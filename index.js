@@ -6,9 +6,10 @@
  * @author: spolu
  *
  * @log:
- * - 2014-07-22 spolu   Fix DNS error when not connected
- * - 2014-06-04 spolu   Move to `mod_layout`
- * - 2014-01-17 spolu   Creation
+ * - 2014-08-03 gammagec Added add_bar method to add external modules under the strip
+ * - 2014-07-22 spolu    Fix DNS error when not connected
+ * - 2014-06-04 spolu    Move to `mod_layout`
+ * - 2014-01-17 spolu    Creation
  */
 "use strict"
 
@@ -75,8 +76,7 @@ var bootstrap = function(http_srv) {
     });
 
     breach.expose('add_bar', function(src, args, cb_) {
-       console.log("adding bar ", args.url + ':' + args.dimension);
-       common._.strip.addBar(args, cb_);
+       common._.strip.add_bar(args.id, args.url, args.dimension, cb_);
     });
   });
 
