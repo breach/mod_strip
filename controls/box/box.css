@@ -29,7 +29,7 @@
   display: none;
 
   position: absolute;
-  left: 7px;
+  left: 9px;
   width: 10px;
   top: 8px;
   bottom: 12px;
@@ -58,7 +58,7 @@
 .box .input:focus {
   position: absolute;
   top: 0;
-  left: 25px;
+  left: 30px;
   right: 0;
   bottom: 0;
 }
