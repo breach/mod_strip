@@ -32,19 +32,15 @@ var bootstrap = function(http_srv) {
     tabs: require('./lib/tabs.js').tabs({}),
     strip: require('./lib/strip.js').strip({
       http_port: http_port
-    }),
-    /*
+    })
+    /*,
     stack: require('./lib/stack.js').stack({
       http_port: http_port
     }),
     */
-    devtools: require('./lib/devtools.js').devtools({
-      http_port: http_port
-    })
   };
 
   breach.init(function() {
-    breach.register('.*', 'devtools');
     breach.register('mod_strip', 'box_.*');
     breach.register('core', 'tabs:.*');
     breach.register('core', 'controls:keyboard');
@@ -56,9 +52,8 @@ var bootstrap = function(http_srv) {
       async.parallel([
         common._.box.init,
         common._.tabs.init,
-        common._.strip.init,
+        common._.strip.init
         //common._.stack.init,
-        common._.devtools.init
       ], cb_);
     });
   
@@ -66,9 +61,8 @@ var bootstrap = function(http_srv) {
       async.parallel([
         common._.box.kill,
         common._.tabs.kill,
-        common._.strip.kill,
+        common._.strip.kill
         //common._.stack.kill,
-        common._.devtools.kill
       ], function(err) {
         common.exit(0);
       });
