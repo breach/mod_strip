@@ -52,6 +52,7 @@ var box_c = function(spec, my) {
   var last_url;               /* string */
   var select_all_handler;     /* select_all_handler(); */
   var focus_handler;          /* focus_handler(); */
+  var blur_handler;           /* blur_handler(); */
 
   var that = {}
 
@@ -197,6 +198,10 @@ var box_c = function(spec, my) {
     my.input_el.focus();
   };
 
+  blur_handler = function() {
+    my.input_el.blur();
+  };
+
   /**************************************************************************/
   /* PUBLIC METHODS */
   /**************************************************************************/
@@ -208,6 +213,7 @@ var box_c = function(spec, my) {
     my.socket.on('state', state_handler);
     my.socket.on('select_all', select_all_handler);
     my.socket.on('focus', focus_handler);
+    my.socket.on('blur', blur_handler);
     my.socket.emit('handshake', '_box');
 
     my.input_el.keyup(input_change_handler);
