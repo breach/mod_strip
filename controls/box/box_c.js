@@ -49,6 +49,7 @@ var box_c = function(spec, my) {
   var form_submit_handler;    /* form_submit_hanlder(); */
 
   var state_handler;          /* state_handler(state); */
+  var last_url;               /* string */
   var select_all_handler;     /* select_all_handler(); */
   var focus_handler;          /* focus_handler(); */
 
@@ -84,8 +85,8 @@ var box_c = function(spec, my) {
   // Handler called on input focusout
   input_focusout_handler = function() {
     var inputValue = my.box_el.find('input').val();
-    my.box_el[inputValue ? 'addClass' : 'removeClass']('searching');
-    if (!inputValue) {
+    if (!inputValue || inputValue === last_url) {
+      my.box_el.removeClass('searching');
       my.socket.emit('input', null);
     }
   }
@@ -96,7 +97,7 @@ var box_c = function(spec, my) {
   input_keydown_handler = function(evt) {
     if(evt.which === 27) {
       my.socket.emit('clear');
-      my.box_el.find('input').val('').blur();
+      my.box_el.find('input').val(last_url).blur();
     }
     if(my.mode === my.MODE_FIND_IN_PAGE && my.input_el.is(':focus')) {
       if(evt.which === 13 && (evt.ctrlKey || evt.metaKey)) {
@@ -118,6 +119,7 @@ var box_c = function(spec, my) {
       input: my.input_el.val(), 
       is_ctrl: false
     });
+    my.box_el.removeClass('searching').find('input').blur();
     evt.preventDefault();
     evt.stopPropagation();
   };
@@ -143,6 +145,7 @@ var box_c = function(spec, my) {
       }
       else if(state.url) {
         my.value = state.url.href;
+        last_url = my.value;
       }
       else {
         my.value = '';
