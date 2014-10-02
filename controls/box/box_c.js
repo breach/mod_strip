@@ -73,7 +73,7 @@ var box_c = function(spec, my) {
   //
   // Handler called on input focusin
   input_focusin_handler = function() {
-    my.box_el.addClass('focus');
+    my.box_el.addClass('searching');
     setTimeout(function() {
       my.input_el.select();
     });
@@ -81,10 +81,13 @@ var box_c = function(spec, my) {
 
   // ### input_focusout_handler
   //
-  // Handler called on input focusin
+  // Handler called on input focusout
   input_focusout_handler = function() {
-    my.box_el.removeClass('focus');
-    my.socket.emit('input', null);
+    var inputValue = my.box_el.find('input').val();
+    my.box_el[inputValue ? 'addClass' : 'removeClass']('searching');
+    if (!inputValue) {
+      my.socket.emit('input', null);
+    }
   }
 
   // ### input_keydown_handler
@@ -93,11 +96,11 @@ var box_c = function(spec, my) {
   input_keydown_handler = function(evt) {
     if(evt.which === 27) {
       my.socket.emit('clear');
-      my.box_el.find('input').blur();
+      my.box_el.find('input').val('').blur();
     }
     if(my.mode === my.MODE_FIND_IN_PAGE && my.input_el.is(':focus')) {
       if(evt.which === 13 && (evt.ctrlKey || evt.metaKey)) {
-        my.socket.emit('submit', { 
+        my.socket.emit('submit', {
           input: my.input_el.val(), 
           is_ctrl: true
         });
