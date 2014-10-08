@@ -1,12 +1,7 @@
 html {
-  font-family: "Roboto", Arial;
-  font-weight: normal;
-  font-size: 13px;
+  font: 13px normal "Roboto", Arial;
   width: 100%;
   height: 100%;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
-}
-
-body {
 }
