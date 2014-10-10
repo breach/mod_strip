@@ -11,6 +11,18 @@
   -webkit-user-select: none;
 }
 
+.bars {
+    position: absolute;
+    left: 0;
+    top: 45px;
+    right: 0;
+    bottom: 0;
+}
+
+.bar {
+    width: 100%;
+}
+
 .strip .bottom {
   position: absolute;
   bottom: 0;
