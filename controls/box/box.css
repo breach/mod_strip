@@ -21,7 +21,7 @@
   color: hsl(110, 80%, 45%) !important;
 }
 
-.box.focus .ssl {
+.box.searching .ssl {
   display: none;
 }
 
@@ -37,7 +37,7 @@
   font-size: 1.2em;
 }
 
-.box.focus .search {
+.box.searching .search {
   display: block;
 }
 
@@ -95,7 +95,7 @@
   opacity: 0;
 }
 
-.box.focus .input form input,
+.box.searching .input form input,
 .box .input:hover form input {
   opacity: 1;
   font-weight: bold;
@@ -127,6 +127,6 @@
 }
 
 .box .input:hover .glass,
-.box.focus .input .glass {
+.box.searching .input .glass {
   display: none;
 }

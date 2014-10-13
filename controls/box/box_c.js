@@ -49,8 +49,10 @@ var box_c = function(spec, my) {
   var form_submit_handler;    /* form_submit_hanlder(); */
 
   var state_handler;          /* state_handler(state); */
+  var last_url;               /* string */
   var select_all_handler;     /* select_all_handler(); */
   var focus_handler;          /* focus_handler(); */
+  var blur_handler;           /* blur_handler(); */
 
   var that = {}
 
@@ -73,7 +75,7 @@ var box_c = function(spec, my) {
   //
   // Handler called on input focusin
   input_focusin_handler = function() {
-    my.box_el.addClass('focus');
+    my.box_el.addClass('searching');
     setTimeout(function() {
       my.input_el.select();
     });
@@ -81,10 +83,13 @@ var box_c = function(spec, my) {
 
   // ### input_focusout_handler
   //
-  // Handler called on input focusin
+  // Handler called on input focusout
   input_focusout_handler = function() {
-    my.box_el.removeClass('focus');
-    my.socket.emit('input', null);
+    var inputValue = my.box_el.find('input').val();
+    if (!inputValue || inputValue === last_url) {
+      my.box_el.removeClass('searching');
+      my.socket.emit('input', null);
+    }
   }
 
   // ### input_keydown_handler
@@ -93,11 +98,11 @@ var box_c = function(spec, my) {
   input_keydown_handler = function(evt) {
     if(evt.which === 27) {
       my.socket.emit('clear');
-      my.box_el.find('input').blur();
+      my.box_el.find('input').val(last_url).blur();
     }
     if(my.mode === my.MODE_FIND_IN_PAGE && my.input_el.is(':focus')) {
       if(evt.which === 13 && (evt.ctrlKey || evt.metaKey)) {
-        my.socket.emit('submit', { 
+        my.socket.emit('submit', {
           input: my.input_el.val(), 
           is_ctrl: true
         });
@@ -115,6 +120,7 @@ var box_c = function(spec, my) {
       input: my.input_el.val(), 
       is_ctrl: false
     });
+    my.box_el.removeClass('searching').find('input').blur();
     evt.preventDefault();
     evt.stopPropagation();
   };
@@ -140,6 +146,7 @@ var box_c = function(spec, my) {
       }
       else if(state.url) {
         my.value = state.url.href;
+        last_url = my.value;
       }
       else {
         my.value = '';
@@ -191,6 +198,10 @@ var box_c = function(spec, my) {
     my.input_el.focus();
   };
 
+  blur_handler = function() {
+    my.input_el.blur();
+  };
+
   /**************************************************************************/
   /* PUBLIC METHODS */
   /**************************************************************************/
@@ -202,6 +213,7 @@ var box_c = function(spec, my) {
     my.socket.on('state', state_handler);
     my.socket.on('select_all', select_all_handler);
     my.socket.on('focus', focus_handler);
+    my.socket.on('blur', blur_handler);
     my.socket.emit('handshake', '_box');
 
     my.input_el.keyup(input_change_handler);

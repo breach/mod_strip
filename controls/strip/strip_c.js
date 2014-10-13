@@ -410,6 +410,7 @@ var strip_c = function(spec, my) {
   select_tab = function(tab_id) {
     if(tab_id !== my.active) {
       my.socket.emit('select', tab_id);
+      my.socket.emit('box_reset');
     }
   };
 
