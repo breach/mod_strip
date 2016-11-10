@@ -50,6 +50,7 @@ var strip_c = function(spec, my) {
 
   var cmd_back;           /* cmd_back(); */
   var cmd_forward;        /* cmd_forward(); */
+  var cmd_reload;         /* cmd_reload(); */
   var cmd_new;            /* cmd_new(); */
   var cmd_update;         /* cmd_update(); */
 
@@ -439,6 +440,13 @@ var strip_c = function(spec, my) {
 
   // ### cmd_back
   //
+  // Issue a reload command
+  cmd_reload = function() {
+    my.socket.emit('reload');
+  };
+
+  // ### cmd_back
+  //
   // Issue a new tab command
   cmd_new = function() {
     my.socket.emit('new');
@@ -472,6 +480,7 @@ var strip_c = function(spec, my) {
 
   that.cmd_back = cmd_back;
   that.cmd_forward = cmd_forward;
+  that.cmd_reload = cmd_reload;
   that.cmd_new = cmd_new;
   that.cmd_update = cmd_update;
 
